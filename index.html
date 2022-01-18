@@ -2,13 +2,69 @@
 <html>
     <head>
         <title>COP 4331 Group Project</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="css/styles.css" rel="stylesheet">
     </head>
 
     <body>
-        <h1 style="color: white; text-align: center;">Welcome Group 1</h1>
-        <!--
-            Our website goes here.
-        -->
+        <div class="row">
+            <div class="col-md-6 header-text" style="background-color: #2d2e2e; height:100vh;">
+              
+                  <img class="logo" src="assets/logo.png">
+               
+            </div>
+            <div class="col-md-6" style="background-color: #fff; height:100vh;">
+                <div class="well">
+                    <div class="login">
+                        <h1 class="header-text">Sign in</h1>
+                        <p>View your account & utilize the "Contact Manager"</p>
+    
+                        <form>
+                            <div class="form-group">
+                                <label for="username">USERNAME</label>
+                                <input type="text" class="form-control" id="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">PASSWORD</label>
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Continue</button>
+                        </form>
+    
+                        <a id="signUp" href="#" class="no-account">Don't have an account? Sign Up!</a>
+            
+                    </div>
+    
+                    <div class="signup">
+                        <h1 class="header-text">Create an Account</h1>
+                        <p>You need an account to use the "Contact Manager"</p>
+    
+                        <form>
+                            <div class="form-group">
+                                <label for="username">USERNAME</label>
+                                <input type="text" class="form-control" id="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">PASSWORD</label>
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">CONFIRM PASSWORD</label>
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                        </form>
+    
+                        <a id="signIn" href="#" class="no-account">Already have an account? Sign In!</a>
+            
+                    </div>
+                </div>
+          </div>
     </body>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="js/code.js"></script>
+
+
 </html>

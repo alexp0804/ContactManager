@@ -1,8 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-:root {
-    --bg-color: #000;
+body {
+    background-color: #fff;
 }
 
-* {
-    background-color: var(--bg-color);
+a {
+    color: rgb(58, 58, 58)
+}
+
+a:hover {
+    color: rgb(31, 31, 31)
+}
+
+h1 {
+    font-family: 'Inter', sans-serif;
+}
+
+label {
+    font-size: 12px;
+    font-weight:bold;
+}
+
+form {
+    padding-bottom: 20px;
+}
+
+.logo {
+    max-width: 40vh;
+    width:auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.header-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.well {
+    max-width: 85%;
+    width:auto;
+    position: relative;
+    top: 28%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.signup {
+    display: none;
+}
+
+.form-control {
+    border-width:0.5px;
+}
+
+.btn-primary {
+    background-color: #000;
+    border:none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background-color: rgb(53, 53, 53);
+}
+
+.no-account {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
 }
