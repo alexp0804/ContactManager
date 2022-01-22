@@ -15,7 +15,6 @@ if ($conn->connect_error)
 }
 
 // Get information from frontend: (first, last, login, password)
-		
 $inData = json_decode(file_get_contents('php://input'), true);
 
 $firstName = $inData["first"];
@@ -49,6 +48,3 @@ else
 }
 
 $conn->close();
-
-?>
-
