@@ -30,11 +30,11 @@ $result = $stmt->get_result();
 
 if (mysqli_num_rows($result) != 0)
 {
-    die("Username already taken.")
+    die("Username already taken.");
 }
 
 // Insert user
- $sql_command = "INSERT INTO Users (FirstName,LastName,Login,Password) Values ('$firstName', '$lastName', '$username', '$password')";
+$sql_command = "INSERT INTO Users (FirstName,LastName,Login,Password) Values ('$firstName', '$lastName', '$username', '$password')";
 
 // Insertion successful
 if ($conn->query($sql_command) === TRUE)
