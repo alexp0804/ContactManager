@@ -25,10 +25,10 @@ function doRegister() {
     let userId = 0;
 
     // Get registration info from document
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
     let first = document.getElementById("firstName").value; 
     let last = document.getElementById("lastName").value; 
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
     // Hash password
     let hashed = md5(password);
@@ -37,7 +37,7 @@ function doRegister() {
     let url = urlBase + '/register.' + extension;
     
     // Convert info into json
-    let tmp = {login:login, password:hashed};
+    let tmp = {first:first, last:last, login:login, password:hashed};
     let jsonPayload = JSON.stringify(tmp);
 
     // Send json to API
