@@ -17,16 +17,16 @@
                 <div class="well">
                     <div class="login">
                         <h1 class="header-text">Sign in</h1>
-                        <p>View your account & utilize the "Contact Manager"</p>
+                        <p>View your account & utilize the Contact Manager</p>
     
                         <form>
                             <div class="form-group">
                                 <label for="username">USERNAME</label>
-                                <input type="text" class="form-control" id="username">
+                                <input type="text" class="form-control" id="username" required>
                             </div>
                             <div class="form-group">
                                 <label for="password">PASSWORD</label>
-                                <input type="password" class="form-control" id="password">
+                                <input type="password" class="form-control" id="password" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Continue</button>
                         </form>
@@ -37,30 +37,29 @@
     
                     <div class="signup">
                         <h1 class="header-text">Create an Account</h1>
-                        <p>You need an account to use the "Contact Manager"</p>
+                        <p>You need an account to use the Contact Manager</p>
     
                         <form>
                             <div class="form-group">
-                                <label for="firstName">FIRST NAME</label>
-                                <input type="text" class="form-control" id="firstName">
+                                <label for="firstName">FIRST NAME <span style="color:#e63946">*</span></label>
+                                <input type="text" class="form-control" id="firstName" required>
                             </div>
                             <div class="form-group">
-                                <label for="lastName">LAST NAME</label>
-                                <input type="text" class="form-control" id="lastName">
+                                <label for="lastName">LAST NAME <span style="color:#e63946">*</span></label>
+                                <input type="text" class="form-control" id="lastName" required>
                             </div>
                             <div class="form-group">
-                                <label for="username">USERNAME</label>
-                                <input type="text" class="form-control" id="registerUsername">
+                                <label for="username">USERNAME <span style="color:#e63946">*</span></label>
+                                <input type="text" class="form-control" id="registerUsername" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">PASSWORD</label>
-                                <input type="password" class="form-control" id="registerPassword">
+                                <label for="password">PASSWORD <span style="color:#e63946">*</span></label>
+                                <input type="password" class="form-control" id="registerPassword" required>
                             </div>
                             <div class="form-group">
-                                <label for="password">CONFIRM PASSWORD</label>
-                                <input type="password" class="form-control" id="confirmPassword">
+                                <label for="password">CONFIRM PASSWORD <span style="color:#e63946">*</span></label> <span class="no_match" id="match-result"></span>
+                                <input type="password" class="form-control" id="confirmPassword" required>
                             </div>
-                            <p id="match-result"></p>
                             <button type="submit" class="btn btn-primary" id="signUpButton">Sign Up</button>
                         </form>
     

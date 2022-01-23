@@ -46,7 +46,7 @@ form {
     max-width: 85%;
     width:auto;
     position: relative;
-    top: 28%;
+    top: 15%;
     bottom: 0;
     left: 0;
     right: 0;
@@ -57,8 +57,16 @@ form {
     display: none;
 }
 
+.login {
+    margin-top: 18%;
+}
+
 .form-control {
     border-width:0.5px;
+}
+
+.no_match {
+    font-size: 12px;
 }
 
 .btn-primary {
