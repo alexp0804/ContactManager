@@ -1,5 +1,5 @@
 
-const urlBase = "http://cop4331-g1.xyz/api";
+const urlBase = "http://cop4332-g1.xyz/api";
 const extension = "php";
 
 /* switch between forms */
@@ -20,6 +20,28 @@ $(function() {
     })
 })
 
+let passA = document.getElementById("registerPassword");
+let passB = document.getElementById("confirmPassword");
+let matchResult = document.getElementById("match-result");
+let signUpButton = document.getElementById("signUpButton");
+
+function checkPass() {
+    if (passA.value != passB.value) {
+        matchResult.innerText = "Passwords do not match.";
+        matchResult.style.color = "red";
+        signUpButton.disabled = true;
+    }
+    else {
+        matchResult.innerText = "";
+        signUpButton.disabled = false;
+    }
+}
+
+passA.addEventListener('keyup', () => {
+        if (passB.value.length != 0) checkPass();
+});
+
+passB.addEventListener('keyup', checkPass);
 
 function doRegister() {
     let userId = 0;
@@ -36,7 +58,7 @@ function doRegister() {
     // Construct api endpoint url
     let url = urlBase + '/register.' + extension;
     
-    // Convert info into json
+    // Convert info into json:
     let tmp = {first:first, last:last, login:login, password:hashed};
     let jsonPayload = JSON.stringify(tmp);
 

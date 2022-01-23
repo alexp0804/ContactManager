@@ -71,6 +71,10 @@ form {
 .btn:hover {
     background-color: rgb(53, 53, 53);
 }
+.btn:disabled {
+    color: #AAA;
+    background-color: #222;
+}
 
 .no-account {
     font-family: 'Inter', sans-serif;
