@@ -1,50 +1,71 @@
 <?php
+    # SQL info
+    $serverName = "localhost";
+    $dBUsername = "root";
+    $dBPassword = "Group1Team";
+    $dbName = "COP4331";
 
-$serverName = "localhost";
-$dBUsername = "root";
-$dBPassword = "Group1Team";
-$dbName = "COP4331";
+    // Create connection
+    $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dbName);
 
-// Create connection
-$conn = new mysqli($serverName, $dBUsername, $dBPassword, $dbName);
+    // Check connection status
+    if ($conn->connect_error)
+    {
+        returnWithError($conn->connect_error);
+    }
 
-// Check connection status
-if ($conn->connect_error)
-{
-    die("Connection failed: " . $conn->connect_error);
-}
+    // Get information from frontend: (first, last, login, password)
+    $inData = getRequestInfo();
 
-// Get information from frontend: (first, last, login, password)
-$inData = json_decode(file_get_contents('php://input'), true);
+    $firstName = $inData["first"];
+    $lastName  = $inData["last"];
+    $username  = $inData["username"];
+    $password  = $inData["password"];
 
-$firstName = $inData["first"];
-$lastName  = $inData["last"];
-$username  = $inData["username"];
-$password  = $inData["password"];
+    // Do not add users with missing fields.
+    if (empty($firstName) || empty($lastName) || empty($username) || empty($password))
+    {
+        returnWithError("Empty field(s)");
+    }
 
-// Check username isn't already taken
-$stmt = $conn->prepare("SELECT * FROM Users WHERE Login=?");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
+    // Check if username already exists
+    $stmt = "SELECT * FROM Users WHERE Login='$username'";
+    $result = $conn->query($stmt);
 
-if (mysqli_num_rows($result) != 0)
-{
-    die("Username already taken.");
-}
+    if ($result->num_rows != 0)
+    {
+        returnWithError("Username already taken.");
+    }
 
-// Insert user
-$sql_command = "INSERT INTO Users (FirstName,LastName,Login,Password) Values ('$firstName', '$lastName', '$username', '$password')";
+    // Insert user
+    $stmt = "INSERT INTO Users (FirstName,LastName,Login,Password) Values ('$firstName', '$lastName', '$username', '$password')";
 
-// Insertion successful
-if ($conn->query($sql_command) === TRUE)
-{
-    echo "New record created successfully";
-}
-// Insertion failed
-else
-{
-    echo "Error: " . $sql_command . "<br>" . $conn->erorr;
-}
+    // Insertion successful
+    if ($conn->query($stmt) === TRUE)
+    {
+        returnWithError("");
+    }
+    // Insertion failed
+    else
+    {
+        returnWithError($conn->error);
+    }
 
-$conn->close();
+    $conn->close();
+
+    function getRequestInfo()
+    {
+        return json_decode(file_get_contents('php://input'), true);
+    }
+
+    function sendResultInfoAsJson($obj)
+	{
+		header('Content-type: application/json');
+		die($obj);
+	}
+		
+	function returnWithError($err)
+	{
+		$retValue = '{"error":"' . $err . '"}';
+		sendResultInfoAsJson($retValue);
+	}
