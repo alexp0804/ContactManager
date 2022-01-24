@@ -14,7 +14,10 @@ $(function() {
 
 $(function() {
     $('#signIn').on('click', function(e){
-        $('.login').css('display', 'inline');
+        $('.login').css({
+            'display': 'block',
+            'margin-top': '18%',
+        });
         $('.signup').css('display', 'none');
         e.preventDefault();
     })
