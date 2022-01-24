@@ -19,26 +19,26 @@
 
     $firstName = $inData["first"];
     $lastName  = $inData["last"];
-    $username  = $inData["username"];
+    $login     = $inData["login"];
     $password  = $inData["password"];
 
     // Do not add users with missing fields.
-    if (empty($firstName) || empty($lastName) || empty($username) || empty($password))
+    if (empty($firstName) || empty($lastName) || empty($login) || empty($password))
     {
         returnWithError("Empty field(s)");
     }
 
-    // Check if username already exists
-    $stmt = "SELECT * FROM Users WHERE Login='$username'";
+    // Check if login already exists
+    $stmt = "SELECT * FROM Users WHERE Login='$login'";
     $result = $conn->query($stmt);
 
     if ($result->num_rows != 0)
     {
-        returnWithError("Username already taken.");
+        returnWithError("Login already taken.");
     }
 
     // Insert user
-    $stmt = "INSERT INTO Users (FirstName,LastName,Login,Password) Values ('$firstName', '$lastName', '$username', '$password')";
+    $stmt = "INSERT INTO Users (FirstName,LastName,Login,Password) Values ('$firstName', '$lastName', '$login', '$password')";
 
     // Insertion successful
     if ($conn->query($stmt) === TRUE)
