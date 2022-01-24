@@ -28,8 +28,11 @@
                                 <label for="password">PASSWORD</label>
                                 <input type="password" class="form-control" id="password" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Continue</button>
+                            <button type="submit" class="btn btn-primary" onclick="doLogin();">Continue</button>
                         </form>
+
+                        <div id="login-error"></div>
+
     
                         <a id="signUp" href="#" class="no-account">Don't have an account? Sign Up!</a>
             
@@ -62,6 +65,8 @@
                             </div>
                             <button type="submit" class="btn btn-primary" id="signUpButton" onclick="doRegister();">Sign Up</button>
                         </form>
+
+                        <div id="register-error"></div>
     
                         <a id="signIn" href="#" class="no-account">Already have an account? Sign In!</a>
             

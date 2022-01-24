@@ -46,28 +46,100 @@ passA.addEventListener('keyup', () => {
 
 passB.addEventListener('keyup', checkPass);
 
+
+function doLogin()
+{
+	userId = 0;
+	
+	// Get username and password from HTML.
+	var login = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	//password = md5(password);
+	
+	document.getElementById("login-error").innerHTML = "";
+
+	// Format the payload and set up the connection.
+	var jsonPayload = '{"username" : "' + login + '", "password" : "' + password + '"}';
+	var url = urlBase + '/login.' + extension;
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		// Send and recieve the payload.
+		xhr.send(jsonPayload);
+		var jsonObject = JSON.parse(xhr.responseText);
+		
+		userId = jsonObject.id;
+		if (userId < 1)
+		{
+			document.getElementById("login-error").innerHTML = jsonObject.error;
+			return;
+		}
+		
+		username = login;
+
+		saveCookie();
+	
+		window.location.href = "contacts.html";
+	}
+	catch(err)
+	{
+		document.getElementById("login-error").innerHTML = err.message;
+	}
+}
+
 function doRegister() {
+    
     let userId = 0;
 
     // Get registration info from document
     let first = document.getElementById("firstName").value; 
     let last = document.getElementById("lastName").value; 
-    let username = document.getElementById("username").value;
-    let password = document.getElementById("password").value;
+    let username = document.getElementById("registerUsername").value;
+    let password = document.getElementById("registerPassword").value;
 
     // Hash password
-    let hashed = md5(password);
+    //let hashed = md5(password);
 
-    // Construct api endpoint url
-    let url = urlBase + '/register.' + extension;
-    
-    // Convert info into json:
-    let tmp = {first:first, last:last, login:login, password:hashed};
-    let jsonPayload = JSON.stringify(tmp);
-
-    // Send json to API
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
+    // Format the payload and set up the connection.
+	var jsonPayload = '{ "first" : "' + first + '", "last" : "' + last + '", "username" : "' + username + '", "password" : "' + password + '" }';
+	var url = urlBase + '/register.' + extension;
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    xhr.send(jsonPayload);
+    
+    try
+	{
+		// Send and recieve the payload.
+		xhr.send(jsonPayload);
+		var jsonObject = JSON.parse(xhr.responseText);
+
+		// Check for error.
+		if (jsonObject.error != "")
+		{
+			document.getElementById("register-error").innerHTML = jsonObject.error;
+			return;
+		}
+
+		// Set fields.
+		document.getElementById("username").value = login;
+		document.getElementById("password").value = password;
+		doLogin();
+	}
+	catch(err)
+	{
+		document.getElementById("register-error").innerHTML = err.message;
+	}
+
 }
+
+function saveCookie()
+{
+	var minutes = 20;
+	var date = new Date();
+	date.setTime(date.getTime() + (minutes * 60 * 1000));	
+	document.cookie = "username=" + username + ",userId=" + userId + ";expires=" + date.toGMTString();
+}
+
