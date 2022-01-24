@@ -10,10 +10,10 @@
         returnWithError($conn->connect_error);
     }
 
-    $login = $inData['login'];
-    $password = $inData['password'];
+    $login = '\'' . $inData['login'] . '\'';
+    $password = '\'' . $inData['password'] . '\'';
 
-    $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login = '$login' AND Password = '$password'");
+    $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login = $login AND Password = $password");
     $stmt->execute();
     $result = $stmt->get_result();
 
