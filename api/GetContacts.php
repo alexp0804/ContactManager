@@ -18,19 +18,23 @@
     else
     {
         $sql = "SELECT * FROM CONTACTS WHERE USERID='$userId'";
+        $result = $conn->query($sql);
 
-        if ($result = $conn->query($sql); != TRUE)
+        if ($result->num_rows > 0)
         {
-           returnWithError($conn->error);
+            $contacts = [];
+
+            while($row = $result->fetch_assoc() == true)
+            {
+                $contacts[] = $row;
+            }
+            sendResultInfoAsJson($contacts);
         }
         else
         {
-            // Get all matching contacts
-            $contacts = fetch_all(MYSQLI_ASSOC); 
-            $result->free_result();
-
-            sendResultInfoAsJson($contacts);
+            returnWithError("No records found");
         }
+
     }
 
     $conn->close();
