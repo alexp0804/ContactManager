@@ -22,7 +22,7 @@
     else
     {
         // Insert into database
-       $sql = "inser into CONTACTS(FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) values ('$contFirstname','$contLastname','$contEmail','$contPhone')";
+       $sql = "insert into CONTACTS(FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) values ('$contFirstname','$contLastname','$contEmail','$contPhone')";
        if ($result = $conn->query($sql) != TRUE)
        {
            returnWithError($conn->error);
