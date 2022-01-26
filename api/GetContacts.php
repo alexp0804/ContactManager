@@ -15,16 +15,37 @@
 	{
 		returnWithError($conn->connect_error);
 	} 
+    else
+    {
+        $sql = "SELECT * FROM CONTACTS WHERE USERID='$userId'";
 
-    $sql = "SELECT * FROM CONTACTS WHERE USERID='$userId'";
-    $result = $conn->query($sql);
-    
-    // Get all matching contacts
-    $contacts = fetch_all(MYSQLI_ASSOC); 
+        if ($result = $conn->query($sql); != TRUE)
+        {
+           returnWithError($conn->error);
+        }
+        else
+        {
+            // Get all matching contacts
+            $contacts = fetch_all(MYSQLI_ASSOC); 
+            $result->free_result();
 
-    $result->free_result();
+            sendResultInfoAsJson($contacts);
+        }
+    }
 
-    echo json_encode($contacts);
+    $conn->close();
+
+	function returnWithError($err)
+	{
+		$retValue = '{"error":"' . $err . '"}';
+		sendResultInfoAsJson($retValue);
+	}
+
+    function sendResultInfoAsJson( $obj )
+	{
+		header('Content-type: application/json');
+		echo $obj;
+	}
 
 	function getRequestInfo()
 	{
