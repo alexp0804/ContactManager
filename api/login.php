@@ -1,21 +1,27 @@
 <?php
 
 	$inData = getRequestInfo();
-	
+
 	$id = 0;
 
-	$conn = new mysqli("localhost", "root", "Group1Team", "COP4331");
+	$serverName = "localhost";
+    $dBUsername = "root";
+    $dBPassword = "Group1Team";
+    $dbName = "COP4331";
+
+	$conn = new mysqli($serverName, $dBUsername, $dBPassword, $dbName);
+	
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	} 
 	else
 	{
-		$sql = "SELECT ID FROM Users where Login='" . $inData["username"] . "'";
+		$sql = "SELECT ID FROM USERS where USERNAME='" . $inData["username"] . "'";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
-            $sql = "SELECT ID FROM Users where Login='" . $inData["username"] . "' and Password='" . $inData["password"] . "'";
+            $sql = "SELECT ID FROM USERS where USERNAME='" . $inData["username"] . "' and PASSWORD='" . $inData["password"] . "'";
             $result = $conn->query($sql);
             if ($result->num_rows > 0)
             {
@@ -26,7 +32,7 @@
             }
             else
             {
-                returnWithError("Password incorrect");
+                returnWithError("Incorrect Password");
             }
 		}
 		else

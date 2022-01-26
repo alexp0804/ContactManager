@@ -6,12 +6,13 @@
     $dBPassword = "Group1Team";
     $dbName = "COP4331";
 
-    $firstName = $inData["first"];
-    $lastName  = $inData["last"];
-    $username  = $inData["username"];
-    $password  = $inData["password"];
-
-    // Create connection
+    // Create account fields
+    $regFirstname = $inData["regFirstname"];
+    $regLastname = $inData["regLastname"];
+    $regUsername = $inData["regUsername"];
+    $regPassword = $inData["regPassword"];
+    $regPasswordConf = $inData["regPasswordConf"];
+    
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dbName);
     
     if ($conn->connect_error) 
@@ -21,7 +22,7 @@
     else
     {
         // Check if username already exists
-        $sql = "SELECT * FROM Users WHERE Login='$username'";
+        $sql = "SELECT * FROM USERS WHERE USERNAME='$regUsername'";
         $result = $conn->query($sql);
         if($result->num_rows > 0)
         {
@@ -29,7 +30,7 @@
         }
         else
         {
-            $sql = "insert into Users(FirstName, LastName, Login, Password) values ('$firstName','$lastName','$username','$password')";
+            $sql = "insert into USERS(FIRSTNAME, LASTNAME, USERNAME, PASSWORD) values ('$regFirstname','$regLastname','$regUsername','$regPassword')";
             if ($result = $conn->query($sql) != TRUE) {
                 returnWithError($conn->error);
             }
