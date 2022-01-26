@@ -26,6 +26,7 @@
 
             while($row = $result->fetch_assoc() == true)
             {
+                echo "row is " . $row;
                 $contacts[] = $row;
             }
             sendResultInfoAsJson($contacts);
