@@ -6,6 +6,7 @@
     $contLastname = $inData["contLastname"];
     $contEmail = $inData["contEmail"];
     $contPhone = $inData["contPhone"];
+    $contUserID = $inData["contUserID"];
 
     // Connect to Contact database
     $serverName = "localhost";
@@ -22,7 +23,7 @@
     else
     {
         // Insert into database
-       $sql = "insert into CONTACTS(FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER) values ('$contFirstname','$contLastname','$contEmail','$contPhone')";
+       $sql = "insert into CONTACTS(FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER, USERID) values ('$contFirstname','$contLastname','$contEmail','$contPhone','$contUserID')";
        if ($result = $conn->query($sql) != TRUE)
        {
            returnWithError($conn->error);
