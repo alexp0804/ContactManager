@@ -17,7 +17,7 @@
 	} 
     else
     {
-        $sql = "SELECT * FROM CONTACTS WHERE USERID='$userId'";
+        $sql = "SELECT * FROM CONTACTS WHERE USERID= '" . $userId . "'";
         $result = $conn->query($sql);
         sendResultInfoAsJson($result);
 
