@@ -20,7 +20,9 @@
     $result = $conn->query($sql);
     
     // Get all matching contacts
-    $contacts = mysqli_fetch_all($result, MYSQLI_ASSOC); 
+    $contacts = fetch_all(MYSQLI_ASSOC); 
+
+    $result->free_result();
 
     echo json_encode($contacts);
 
