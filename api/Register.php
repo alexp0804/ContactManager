@@ -36,7 +36,8 @@
             }
             else
             {
-                returnWithError(""); // Return with empty error, to signal account creation successful
+                // Return with empty error, to signal account creation successful
+                returnWithError("");
             }
         }
         $conn->close();
