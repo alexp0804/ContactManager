@@ -1,13 +1,14 @@
+var urlBase = 'http://cop4332-g1.xyz/api';
+var extension = 'php';
 
-const urlBase = "http://cop4332-g1.xyz/api";
-const extension = "php";
+var userId = 0;
+var username = "";
 
 /* switch between forms */
 $(function() {
     $('#signUp').on('click', function(e){
         $('.login').css('display', 'none');
         $('.signup').css('display', 'inline');
-        //$('.signup').css('margin-top', '-70px');
         e.preventDefault();
     })
 })
@@ -23,44 +24,180 @@ $(function() {
     })
 })
 
-let passA = document.getElementById("registerPassword");
-let passB = document.getElementById("confirmPassword");
-let matchResult = document.getElementById("match-result");
-let signUpButton = document.getElementById("signUpButton");
+$(function() {
+    $('#btnAddContact').on('click', function(e){
+		$('.searchContacts').css('display', 'none');
+		$('.displayContacts').css('display', 'none');
+		$('.aboutProject').css('display', 'none');
+		$('.addContact').css({
+            'display': 'block',
+            'margin-top': '10%',
+        });
+        e.preventDefault();
+    })
+})
 
-function checkPass() {
-    if (passA.value != passB.value) {
-        matchResult.innerText = "Passwords do not match.";
-        matchResult.style.color = "red";
-        signUpButton.disabled = true;
-    }
-    else {
-        matchResult.innerText = "";
-        signUpButton.disabled = false;
-    }
+$(function() {
+    $('#btnDisplayContacts').on('click', function(e){
+		$('.searchContacts').css('display', 'none');
+		$('.addContact').css('display', 'none');
+		$('.aboutProject').css('display', 'none');
+		$('.displayContacts').css({
+            'display': 'block',
+            'margin-top': '10%',
+        });
+        e.preventDefault();
+    })
+})
+
+$(function() {
+    $('#logo').on('click', function(e){
+		$('.searchContacts').css('display', 'none');
+		$('.addContact').css('display', 'none');
+		$('.aboutProject').css('display', 'none');
+		$('.displayContacts').css({
+            'display': 'block',
+            'margin-top': '10%',
+        });
+        e.preventDefault();
+    })
+})
+
+$(function() {
+    $('#btnSearchContacts').on('click', function(e){
+		$('.displayContacts').css('display', 'none');
+		$('.addContact').css('display', 'none');
+		$('.aboutProject').css('display', 'none');
+		$('.searchContacts').css({
+            'display': 'block',
+            'margin-top': '10%',
+        });
+        e.preventDefault();
+    })
+})
+
+$(function() {
+    $('#btnInfo').on('click', function(e){
+		$('.displayContacts').css('display', 'none');
+		$('.addContact').css('display', 'none');
+		$('.searchContacts').css('display', 'none');
+		$('.aboutProject').css({
+            'display': 'block',
+            'margin-top': '10%',
+        });
+        e.preventDefault();
+    })
+})
+
+window.onload=function(){
+    let passA = document.getElementById("registerPassword");
+	let passB = document.getElementById("confirmPassword");
+	let matchResult = document.getElementById("match-result");
+	let signUpButton = document.getElementById("register-submit");
+
+	function checkPass() {
+		if (passA.value != passB.value) {
+			matchResult.innerText = "Passwords do not match.";
+			matchResult.style.color = "red";
+			signUpButton.disabled = true;
+		}
+		else {
+			matchResult.innerText = "";
+			signUpButton.disabled = false;
+		}
+	}
+	passA.addEventListener('keyup', () => {
+        if (passB.value.length != 0) checkPass();
+	});
+
+	passB.addEventListener('keyup', checkPass);
+
 }
 
-passA.addEventListener('keyup', () => {
-        if (passB.value.length != 0) checkPass();
+// remove spaces & allow using 'enter' to submit form
+$(function() {
+	$("input#username").on({
+		keydown: function(e) {
+			// 13 is ascii for enter
+			if (e.which === 13)
+				return document.getElementById("login-submit").click();
+
+			// 32 is ascii for space
+			if (e.which === 32)
+				return false;
+		},
+		// remove spaces w/ regex
+		change: function() {
+			this.value = this.value.replace(/\s/g, "");
+		}
+	})
+
+	$("input#registerUsername").on({
+		keydown: function(e) {
+			if (e.which === 13)
+				document.getElementById("register-submit").click();
+
+			if (e.which === 32)
+				return false;
+		},
+		change: function() {
+			this.value = this.value.replace(/\s/g, "");
+		}
+	})
+
+	$("input#password").on({
+		keydown: function(e) {
+			if (e.which === 13)
+				document.getElementById("login-submit").click();
+
+			if (e.which === 32)
+				return false;
+		},
+		change: function() {
+			this.value = this.value.replace(/\s/g, "");
+		}
+	})
+
+	$("input#registerPassword").on({
+		keydown: function(e) {
+			if (e.which === 13)
+				document.getElementById("register-submit").click();
+
+			if (e.which === 32)
+				return false;
+		},
+		change: function() {
+			this.value = this.value.replace(/\s/g, "");
+		}
+	})
+
+	$("input#confirmPassword").on({
+		keydown: function(e) {
+			if (e.which === 13)
+				document.getElementById("register-submit").click();
+
+			if (e.which === 32)
+				return false;
+		},
+		change: function() {
+			this.value = this.value.replace(/\s/g, "");
+		}
+	})
 });
 
-passB.addEventListener('keyup', checkPass);
-
-
-function doLogin()
-{
+// login
+function doLogin() {
 	userId = 0;
 	
-	// Get username and password from HTML.
 	var login = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
-	//password = md5(password);
+	password = md5(password);
 	
 	document.getElementById("login-error").innerHTML = "";
 
-	// Format the payload and set up the connection.
+	// format json payload + setup connection
 	var jsonPayload = '{"username" : "' + login + '", "password" : "' + password + '"}';
-	var url = urlBase + '/login.' + extension;
+	var url = urlBase + '/Login.' + extension;
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -82,7 +219,7 @@ function doLogin()
 
 		saveCookie();
 	
-		window.location.href = "contacts.html";
+		window.location.href = "main.html";
 	}
 	catch(err)
 	{
@@ -90,56 +227,89 @@ function doLogin()
 	}
 }
 
-function doRegister() {
-    
-    let userId = 0;
+function doRegister()
+{
+	userId = 0;
+	
+	var firstName = document.getElementById("firstName").value;
+	var lastName = document.getElementById("lastName").value;
+	var login = document.getElementById("registerUsername").value;
+	var password = document.getElementById("registerPassword").value;
+	var confirmPassword = document.getElementById("confirmPassword").value;
+	var tempPass = password;
+	
+	password = md5(password);
+	confirmPassword = md5(confirmPassword);
+	
+	document.getElementById("register-error").innerHTML = "";
 
-    // Get registration info from document
-    let first = document.getElementById("firstName").value; 
-    let last = document.getElementById("lastName").value; 
-    let username = document.getElementById("registerUsername").value;
-    let password = document.getElementById("registerPassword").value;
-
-    // Hash password
-    //let hashed = md5(password);
-
-    // Format the payload and set up the connection.
-	var jsonPayload = '{ "first" : "' + first + '", "last" : "' + last + '", "username" : "' + username + '", "password" : "' + password + '" }';
-	var url = urlBase + '/register.' + extension;
+	var jsonPayload = '{ "regFirstname" : "' + firstName + '", "regLastname" : "' + lastName + '", "regUsername" : "' + login + '", "regPassword" : "' + password + '", "regPasswordConf" : "' + confirmPassword + '" }';
+	var url = urlBase + '/Register.' + extension;
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", url, false);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    
-    try
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
 	{
-		// Send and recieve the payload.
 		xhr.send(jsonPayload);
 		var jsonObject = JSON.parse(xhr.responseText);
 
-		// Check for error.
 		if (jsonObject.error != "")
 		{
 			document.getElementById("register-error").innerHTML = jsonObject.error;
 			return;
 		}
 
-		// Set fields.
 		document.getElementById("username").value = login;
-		document.getElementById("password").value = password;
+		document.getElementById("password").value = tempPass;
 		doLogin();
 	}
 	catch(err)
 	{
 		document.getElementById("register-error").innerHTML = err.message;
 	}
-
 }
 
 function saveCookie()
 {
 	var minutes = 20;
 	var date = new Date();
-	date.setTime(date.getTime() + (minutes * 60 * 1000));	
+	date.setTime(date.getTime()+(minutes*60*1000));	
 	document.cookie = "username=" + username + ",userId=" + userId + ";expires=" + date.toGMTString();
 }
 
+function doLogout()
+{
+	userId = 0;
+	username = "";
+	document.cookie = "username= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	window.location.href = "index.html";
+}
+
+function readCookie()
+{
+	userId = -1;
+	var data = document.cookie;
+	var splits = data.split(",");
+
+	for(var i = 0; i < splits.length; i++) 
+	{
+		var thisOne = splits[i].trim();
+		var tokens = thisOne.split("=");
+		if (tokens[0] == "username")
+		{
+			username = tokens[1];
+		}
+		else if (tokens[0] == "userId")
+		{
+			userId = parseInt(tokens[1].trim());
+		}
+	}
+	
+	if (userId < 0)
+	{
+		return null;
+	}
+
+	return userId;
+}

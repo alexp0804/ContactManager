@@ -12,7 +12,7 @@ a:hover {
     color: rgb(31, 31, 31)
 }
 
-h1 {
+h1, h2, h3, h4 {
     font-family: 'Inter', sans-serif;
 }
 
@@ -53,6 +53,11 @@ form {
     margin: auto;
 }
 
+.form-error-text {
+    color:#e63946;
+    font-size:12px;
+}
+
 .signup {
     display: none;
 }
@@ -74,6 +79,10 @@ form {
     border:none;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: rgb(37, 37, 37);
 }
 
 .btn:hover {
