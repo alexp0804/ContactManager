@@ -25,7 +25,7 @@
     else
     {
         // Check that entry exists
-        $sql = "SELECT * FROM CONTACTS WHERE contactId='$contactId' AND userID='$userId'";
+        $sql = "SELECT * FROM Contacts WHERE contactId='$contactId' AND userID='$userId'";
         $result = $conn->query($sql);
         if ($result->num_rows != 1)
         {
