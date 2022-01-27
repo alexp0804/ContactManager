@@ -32,6 +32,7 @@
                 $contacts[] = $row;
             }
             sendResultInfoAsJson($contacts);
+            returnWithError("found + $inData");
         }
         else
         {
