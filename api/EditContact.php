@@ -25,11 +25,11 @@
     else
     {
         // Check that entry exists
-        $sql = "SELECT * FROM CONTACTS WHERE ContactId='$contactId' AND UserID='$userId'";
+        $sql = "SELECT * FROM CONTACTS WHERE CONTACTID = '$contactId' AND USERID = '$userId'";
         $result = $conn->query($sql);
-        if ($result->num_rows != 0)
+        if ($result->num_rows != 1)
         {
-            returnWithError("Entry not found");
+            returnWithError("Entry not found, for $userId and $contactId");
         }
         else
         {
