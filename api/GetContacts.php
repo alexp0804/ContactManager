@@ -26,7 +26,7 @@
 
             while($row = $result->fetch_assoc())
             {
-                $contacts[] = json_encode($row);
+                $contacts[] = $row;
             }
             sendResultInfoAsJson($contacts);
         }
@@ -48,8 +48,8 @@
     function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-        $json = json_encode($obj);
-		echo $json;
+        // $json = json_encode($obj);
+		echo $obj;
 	}
 
 	function getRequestInfo()
