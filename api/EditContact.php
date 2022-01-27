@@ -2,8 +2,8 @@
     // Get contact info from front-end
     $inData = getRequestInfo();
 
-    $newFirstname = $inData["newFirstname"];
-    $newLastname = $inData["newLastname"];
+    $newFirstName = $inData["newFirstName"];
+    $newLastName = $inData["newLastName"];
     $newEmail = $inData["newEmail"];
     $newPhone = $inData["newPhone"];
     
@@ -35,8 +35,8 @@
         {
             // Update SQL entry
             $sql = "UPDATE CONTACTS SET
-                    FirstName='$newFirstname',
-                    LastName='$newLastname',
+                    FirstName='$newFirstName',
+                    LastName='$newLastName',
                     Email='$newEmail',
                     PhoneNumber='$newPhone'
                     where UserID='$userId' and ContactID='$contactId'";

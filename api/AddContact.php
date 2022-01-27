@@ -2,8 +2,8 @@
     // Get contact info from front-end
     $inData = getRequestInfo();
 
-    $contFirstname = $inData["contFirstname"];
-    $contLastname = $inData["contLastname"];
+    $contFirstName = $inData["contFirstName"];
+    $contLastName = $inData["contLastName"];
     $contEmail = $inData["contEmail"];
     $contPhone = $inData["contPhone"];
     $contUserID = $inData["contUserID"];
@@ -23,7 +23,7 @@
     else
     {
         // Insert into database
-       $sql = "insert into CONTACTS(FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER, USERID) values ('$contFirstname','$contLastname','$contEmail','$contPhone','$contUserID')";
+       $sql = "insert into CONTACTS(FIRSTNAME, LASTNAME, EMAIL, PHONENUMBER, USERID) values ('$contFirstName','$contLastName','$contEmail','$contPhone','$contUserID')";
        if ($result = $conn->query($sql) != TRUE)
        {
            returnWithError($conn->error);
