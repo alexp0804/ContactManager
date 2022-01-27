@@ -1,7 +1,6 @@
 <?php
     // Get contact info from front-end
     $inData = getRequestInfo();
-    returnWithError("$inData");
 
     $newFirstName = $inData["newFirstName"];
     $newLastName = $inData["newLastName"];
@@ -30,7 +29,7 @@
         $result = $conn->query($sql);
         if ($result->num_rows != 1)
         {
-            returnWithError("Entry not found, for $userId and $contactId and $inData");
+            returnWithError("Entry not found");
         }
         else
         {
