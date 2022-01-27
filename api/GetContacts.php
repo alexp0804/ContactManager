@@ -19,7 +19,6 @@
     {
         $sql = "SELECT * FROM CONTACTS WHERE USERID= '" . $userId . "'";
         $result = $conn->query($sql);
-        sendResultInfoAsJson($result);
 
         if ($result->num_rows > 0)
         {
@@ -27,7 +26,6 @@
 
             while($row = $result->fetch_assoc() == true)
             {
-                echo "row is " . $row;
                 $contacts[] = $row;
             }
             sendResultInfoAsJson($contacts);
