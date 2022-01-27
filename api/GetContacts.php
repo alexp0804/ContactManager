@@ -2,6 +2,7 @@
     // Get contact info from front-end
     $inData = getRequestInfo();
     
+    
     $userID = $inData["ID"];
 
     if (!is_numeric($userID))
