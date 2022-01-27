@@ -24,7 +24,7 @@
         {
             $contacts = [];
 
-            while($row = $result->fetch_assoc() == true)
+            while($row = $result->fetch_assoc())
             {
                 $contacts[] = json_encode($row);
             }
