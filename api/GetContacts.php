@@ -4,6 +4,9 @@
     
     $userID = $inData["ID"];
 
+    if (!is_numeric($userID))
+        returnWithError("Non numeric input");
+
 	$serverName = "localhost";
     $dBUsername = "root";
     $dBPassword = "Group1Team";
