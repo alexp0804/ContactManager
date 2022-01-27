@@ -26,7 +26,7 @@
 
             while($row = $result->fetch_assoc() == true)
             {
-                $contacts[] = $row;
+                $contacts[] = json_encode($row);
             }
             sendResultInfoAsJson($contacts);
         }
