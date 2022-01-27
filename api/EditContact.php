@@ -1,6 +1,7 @@
 <?php
     // Get contact info from front-end
     $inData = getRequestInfo();
+    returnWithError("$inData");
 
     $newFirstName = $inData["newFirstName"];
     $newLastName = $inData["newLastName"];
@@ -55,7 +56,7 @@
 
     $conn->close();
     
-    function getRequestInfo()
+	function getRequestInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
 	}
@@ -70,4 +71,5 @@
 	{
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson($retValue);
+        die();
 	}
