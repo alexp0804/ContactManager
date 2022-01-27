@@ -48,8 +48,8 @@
     function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-        // $json = json_encode($obj);
-		echo $obj;
+        $json = json_encode($obj);
+		echo $json;
 	}
 
 	function getRequestInfo()
