@@ -29,7 +29,7 @@
         $result = $conn->query($sql);
         if ($result->num_rows != 1)
         {
-            returnWithError("Entry not found, for $userId and $contactId");
+            returnWithError("Entry not found, for $userId and $contactId and $inData");
         }
         else
         {
