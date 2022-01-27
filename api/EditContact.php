@@ -25,7 +25,7 @@
     else
     {
         // Check that entry exists
-        $sql = "SELECT * FROM Contacts WHERE contactId='$contactId' AND userID='$userId'";
+        $sql = "SELECT * FROM CONTACTS WHERE ContactId='$contactId' AND UserID='$userId'";
         $result = $conn->query($sql);
         if ($result->num_rows != 1)
         {
@@ -34,7 +34,7 @@
         else
         {
             // Update SQL entry
-            $sql = "UPDATE Contacts SET
+            $sql = "UPDATE CONTACTS SET
                     FirstName='$newFirstname',
                     LastName='$newLastname',
                     Email='$newEmail',
