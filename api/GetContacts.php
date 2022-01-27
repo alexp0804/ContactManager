@@ -46,6 +46,7 @@
 	{
 		$retValue = '{"error":"' . $err . '"}';
 		sendResultInfoAsJson($retValue);
+        die();
 	}
 
     function sendResultInfoAsJson( $obj )
