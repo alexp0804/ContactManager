@@ -23,17 +23,16 @@
     else
     {
         // Delete from database
-        $sql = "DELETE FROM CONTACTS WHERE FIRSTNAME=? and LASTNAME=? and EMAIL=? and PHONENUMBER=? and USERID=?";
-        $sql->bind_param("sssss", $contFirstName, $contLastName, $contEmail, $contPhone, $contuserID);
-       if ($result = $conn->query($sql) != TRUE)
-       {
-           returnWithError($conn->error);
-       }
-       else
-       {
-           // Return with empty error, to signal account creation successful
-           returnWithError("");
-       }
+        $sql = "DELETE FROM CONTACTS WHERE FIRSTNAME='$contFirstName' AND LASTNAME='$contLastName' AND EMAIL='$contEmail' AND PHONENUMBER='$contPhone' AND USERID=$contUserID";
+        if ($result = $conn->query($sql) != TRUE)
+        {
+            returnWithError($conn->error);
+        }
+        else
+        {
+            // Return with empty error, to signal account creation successful
+            returnWithError("");
+        }
     }
 
     $conn->close();
