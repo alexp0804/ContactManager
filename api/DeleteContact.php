@@ -23,7 +23,7 @@
     else
     {
         // Delete from database
-        $sql = "DELETE FROM CONTACTS WHERE (FIRSTNAME=?, LASTNAME=?, EMAIL=?, PHONENUMBER=?, USERID=?)";
+        $sql = "DELETE FROM CONTACTS WHERE FIRSTNAME=? and LASTNAME=? and EMAIL=? and PHONENUMBER=? and USERID=?";
         $sql->bind_param("sssss", $contFirstName, $contLastName, $contEmail, $contPhone, $contuserID);
        if ($result = $conn->query($sql) != TRUE)
        {
