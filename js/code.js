@@ -215,6 +215,7 @@ function doLogin() {
 	}
 }
 
+
 function doRegister()
 {
 	userId = 0;
@@ -255,6 +256,48 @@ function doRegister()
 	catch(err)
 	{
 		document.getElementById("register-error").innerHTML = err.message;
+	}
+}
+
+function doAddContact()
+{
+
+	var firstname = document.getElementById("addFirstName").value;
+	var lastname = document.getElementById("addLastName").value;
+	var email = document.getElementById("addEmail").value;
+	var phoneNum = document.getElementById("phone").value;
+  
+	
+  	var jsonPayload = '{"contUserID" : "' + userId + '", "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
+	var url = urlBase + '/AddContact.' + extension;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				
+					if (jsonObject.error == "")
+					{
+						document.getElementById("addingResult").innerHTML = "Contact has been added";
+					}
+					else
+					{
+						document.getElementById("addingResult").innerHTML = jsonObject.error;
+					}
+			}
+      
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("addingResult").innerHTML = err.message;
 	}
 }
 
@@ -302,48 +345,6 @@ function readCookie()
 	return userId;
 }
 
-
-function doAddContact()
-{
-
-	var firstname = document.getElementById("addFirstName").value;
-	var lastname = document.getElementById("addLastName").value;
-	var email = document.getElementById("addEmail").value;
-	var phoneNum = document.getElementById("phone").value;
-  
-	
-  	var jsonPayload = '{"contUserID" : "' + userId + '", "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
-	var url = urlBase + '/AddContact.' + extension;
-	
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-				var jsonObject = JSON.parse(xhr.responseText);
-				
-					if (jsonObject.error == "")
-					{
-						document.getElementById("addingResult").innerHTML = "Contact has been added";
-					}
-					else
-					{
-						document.getElementById("addingResult").innerHTML = jsonObject.error;
-					}
-			}
-      
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		document.getElementById("addingResult").innerHTML = err.message;
-	}
-}
 
 
 /*function doPartialSearch()
