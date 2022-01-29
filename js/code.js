@@ -345,8 +345,8 @@ function doAddContact()
 	}
 }
 
-/*
-function doPartialSearch()
+
+/*function doPartialSearch()
 {
     var input, filter, table, tr, td, i;
     input = document.getElementById("SearchInput");
