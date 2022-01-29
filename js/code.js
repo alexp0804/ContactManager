@@ -63,18 +63,6 @@ $(function() {
     })
 })
 
-$(function() {
-    $('#btnSearchContacts').on('click', function(e){
-		$('.displayContacts').css('display', 'none');
-		$('.addContact').css('display', 'none');
-		$('.aboutProject').css('display', 'none');
-		$('.searchContacts').css({
-            'display': 'block',
-            'margin-top': '10%',
-        });
-        e.preventDefault();
-    })
-})
 
 $(function() {
     $('#btnInfo').on('click', function(e){
@@ -313,3 +301,53 @@ function readCookie()
 
 	return userId;
 }
+
+function doAddContact()
+{
+    var firstname = document.getElementById("addFirstName").value;
+    var lastname = document.getElementById("addLastName").value;
+    var email = document.getElementById("addEmail").value;
+    var phoneNum = document.getElementById("phone").value;
+
+    var jsonPayload = '{"contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
+    var url = urlBase + '/AddContact.' + extension;
+    var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+	{
+		xhr.send(jsonPayload);
+		var jsonObject = JSON.parse(xhr.responseText);
+
+		if (jsonObject.error != "")
+		{
+			document.getElementById("adding-error").innerHTML = jsonObject.error;
+			return;
+		}
+	}
+	catch(err)
+	{
+		document.getElementById("adding-error").innerHTML = err.message;
+	}
+}
+
+function doPartialSearch()
+{
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("SearchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("contactContainer");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++){
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+
