@@ -345,7 +345,7 @@ function doAddContact()
 	}
 }
 
-
+/*
 function doPartialSearch()
 {
     var input, filter, table, tr, td, i;
@@ -364,5 +364,5 @@ function doPartialSearch()
         }
     }
 }
-
+*/
 
