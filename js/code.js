@@ -197,7 +197,6 @@ function doLogin() {
 		var jsonObject = JSON.parse(xhr.responseText);
 		
 		userId = jsonObject.id;
-		document.getElementById("id").value = jsonObject.id;
 		if (userId < 1)
 		{
 			document.getElementById("login-error").innerHTML = jsonObject.error;
@@ -267,9 +266,8 @@ function doAddContact()
 	var lastname = document.getElementById("addLastName").value;
 	var email = document.getElementById("addEmail").value;
 	var phoneNum = document.getElementById("phone").value;
-  	var idUser = document.getElementById("id").value;
 	
-  	var jsonPayload = '{"contUserID" : "' + idUser + '", "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
+  	var jsonPayload = '{"contUserID" : "' + userId + '", "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
 	var url = urlBase + '/AddContact.' + extension;
 	
 	var xhr = new XMLHttpRequest();
