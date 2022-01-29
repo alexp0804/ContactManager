@@ -268,7 +268,7 @@ function doAddContact()
 	var phoneNum = document.getElementById("phone").value;
   
 	
-  	var jsonPayload = '{"contUserID" : "' + userId + '", "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
+  	var jsonPayload = '{"contUserID" : "' + jsonObject.id + '", "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
 	var url = urlBase + '/AddContact.' + extension;
 	
 	var xhr = new XMLHttpRequest();
