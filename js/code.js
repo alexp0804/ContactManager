@@ -27,7 +27,7 @@ $(function() {
 $(function() {
     $('#btnAddContact').on('click', function(e){
 		$('.searchContacts').css('display', 'none');
-		$('.displayContacts').css('display', 'none');
+		$('.displayContactContainer').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
 		$('.addContact').css({
             'display': 'block',
@@ -42,7 +42,7 @@ $(function() {
 		$('.searchContacts').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
-		$('.displayContacts').css({
+		$('.displayContactContainer').css({
             'display': 'block',
             'margin-top': '10%',
         });
@@ -55,7 +55,7 @@ $(function() {
 		$('.searchContacts').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
-		$('.displayContacts').css({
+		$('.displayContactContainer').css({
             'display': 'block',
             'margin-top': '10%',
         });
@@ -63,22 +63,10 @@ $(function() {
     })
 })
 
-$(function() {
-    $('#btnSearchContacts').on('click', function(e){
-		$('.displayContacts').css('display', 'none');
-		$('.addContact').css('display', 'none');
-		$('.aboutProject').css('display', 'none');
-		$('.searchContacts').css({
-            'display': 'block',
-            'margin-top': '10%',
-        });
-        e.preventDefault();
-    })
-})
 
 $(function() {
     $('#btnInfo').on('click', function(e){
-		$('.displayContacts').css('display', 'none');
+		$('.displayContactContainer').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.searchContacts').css('display', 'none');
 		$('.aboutProject').css({
@@ -219,13 +207,14 @@ function doLogin() {
 
 		saveCookie();
 	
-		window.location.href = "main.html";
+		window.location.href = "contacts.html";
 	}
 	catch(err)
 	{
 		document.getElementById("login-error").innerHTML = err.message;
 	}
 }
+
 
 function doRegister()
 {
@@ -267,6 +256,46 @@ function doRegister()
 	catch(err)
 	{
 		document.getElementById("register-error").innerHTML = err.message;
+	}
+}
+
+function doAddContact()
+{
+	var firstname = document.getElementById("addFirstName").value;
+	var lastname = document.getElementById("addLastName").value;
+	var email = document.getElementById("addEmail").value;
+	var phoneNum = document.getElementById("phone").value;
+	
+  	var jsonPayload = '{"contUserID" : "' + userId + '", "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" : "' + email + '", "contPhone" : "' + phoneNum + '"}';
+	var url = urlBase + '/AddContact.' + extension;
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				
+					if (jsonObject.error == "")
+					{
+						document.getElementById("addingResult").innerHTML = "Contact has been added";
+					}
+					else
+					{
+						document.getElementById("addingResult").innerHTML = jsonObject.error;
+					}
+			}
+      
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("addingResult").innerHTML = err.message;
 	}
 }
 
@@ -313,3 +342,26 @@ function readCookie()
 
 	return userId;
 }
+
+
+
+/*function doPartialSearch()
+{
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("SearchInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("displayContacts");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++){
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+*/
+

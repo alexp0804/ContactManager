@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     background: #f0f0f0;
 }
@@ -197,9 +202,8 @@ label {
     margin-top:10%;
 }
 
-.searchContacts {
-    display: none;
-    margin-top:10%;
+.search{
+    margin-bottom: 1%;
 }
 
 .aboutProject {
