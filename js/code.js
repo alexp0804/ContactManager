@@ -196,7 +196,7 @@ function doLogin() {
 		xhr.send(jsonPayload);
 		var jsonObject = JSON.parse(xhr.responseText);
 		
-		this.userId = jsonObject.id;
+		userId = jsonObject.id;
 		if (userId < 1)
 		{
 			document.getElementById("login-error").innerHTML = jsonObject.error;
@@ -261,7 +261,7 @@ function doRegister()
 
 function doAddContact()
 {
-
+	userId = jsonObject.id;
 	var firstname = document.getElementById("addFirstName").value;
 	var lastname = document.getElementById("addLastName").value;
 	var email = document.getElementById("addEmail").value;
