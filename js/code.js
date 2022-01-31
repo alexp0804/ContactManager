@@ -196,7 +196,7 @@ function doLogin() {
 		xhr.send(jsonPayload);
 		var jsonObject = JSON.parse(xhr.responseText);
 		
-		userId = jsonObject.id;
+		this.userId = jsonObject.id;
 		if (userId < 1)
 		{
 			document.getElementById("login-error").innerHTML = jsonObject.error;
