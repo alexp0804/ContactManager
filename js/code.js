@@ -215,6 +215,59 @@ function doLogin() {
 	}
 }
 
+function doSearch()
+{
+    // Call search API and get resulting json
+    var search = document.getElementById("searchContacts").value;
+    var jsonPayload = '{ "userID": ' + userId + '", "search": ' + search + '" }';
+
+    var  url = urlBase + '/SearchContacts.' + extension;
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", url, false);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				var jsonObject = JSON.parse(xhr.responseText);
+				
+                if (jsonObject.error == "")
+                {
+                    // Clear table
+                    var table = document.getElementById("displayContacts");
+                    $("#displayContacts tbody tr").remove();
+
+                    // Fill table with contacts
+                    var contacts = jsonObject.results;
+                    var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER"];
+
+                    // For each of the contacts
+                    for (var i = 0; i < contacts.length; i++)
+                    {
+                        // Create a new row
+                        var row = table.insertRow(0);
+
+                        // Fill the row with the relevant information
+                        for (const field : info_fields)
+                        {
+                            var cell = row.insertCell(0); 
+                            cell.innerHTML = contacts[i].info;
+                        }
+                    }
+                }
+			}
+		};
+
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+        return;	
+	}
+}
 
 function doRegister()
 {
