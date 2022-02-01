@@ -20,7 +20,7 @@
 	} 
 	else
 	{
-        $sql = "select FIRSTNAME from CONTACTS where FIRSTNAME like '$search' and UserID=$userID";
+        $sql = "select FIRSTNAME from CONTACTS where FIRSTNAME like '%$search%' and UserID=$userID";
         $result = $conn->query($sql);
 
 		while ($row = $result->fetch_assoc())
