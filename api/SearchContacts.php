@@ -1,6 +1,8 @@
 <?php
 
     $inData = getRequestInfo();
+    $userID = $inData["userID"];
+    $search = $inData["search"];
 
 	$searchResults = "";
 	$searchCount = 0;
@@ -18,13 +20,9 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select FIRSTNAME from Contacts where FIRSTNAME like ? and UserID=?");
-		$colorName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $colorName, $inData["userID"]);
-		$stmt->execute();
-		
-		$result = $stmt->get_result();
-		
+        $sql = "select FIRSTNAME from CONTACTS where FIRSTNAME like '$search' and UserID=$userID";
+        $result = $conn->query($sql);
+
 		while ($row = $result->fetch_assoc())
 		{
 			if ($searchCount > 0)
