@@ -267,11 +267,7 @@ function doAddContact()
 	var email = document.getElementById("addEmail").value;
 	var phoneNum = document.getElementById("phone").value;
 	
-    var tmp = { contUserID:userId, contFirstName:firstname, contLastName:lastname, contEmail:email, contPhone:phoneNum };
-    console.log(tmp);
-    var jsonPayload = JSON.stringify(tmp);
-    console.log(jsonPayload);
-
+    var jsonPayload = '{"contUserID" : ' + userId + ', "contFirstName" : "' + firstname + '", "contLastName" : "' + lastname + '", "contEmail" :     "' + email + '", "contPhone" : "' + phoneNum + '"}';
 	var url = urlBase + '/AddContact.' + extension;
 	
 	var xhr = new XMLHttpRequest();
