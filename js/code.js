@@ -379,7 +379,7 @@ function doSearch()
                     for (var i = 0; i < contacts.length; i++)
                     {
                         // Create a new row
-                        var row = table.insertRow(1);
+                        var row = table.insertRow(0);
 
                         // Fill the row with the relevant information
                         for (const field of info_fields)
