@@ -89,7 +89,7 @@
                 <div class="well">
                     <div class="addContact">
                         <h3>Add New Contact</h3>
-                        <form id="addContact">
+                        <div id="addContact">
                             <div class="form-row">
                               <div class="form-group col-md-6">
                                 <label for="addFirstName">FIRST NAME</label>
@@ -110,7 +110,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary" onclick="doAddContact();">Add Contact</button>
                             <div class="form-error-text" id="addingResult"></div>
-                        </form>
+                        </div>
                     </div>
 
                        <!-- All Contacts -->
@@ -118,10 +118,10 @@
                         <div class="displayContactContainer">
                             <h3>All Contacts</h3>
                             <div class="search">
-                                <form id="searchContacts" type="submit" onsubmit="doSearch(); return false" class="search form-inline d-flex justify-content-center md-form form-sm">
+                                <div id="searchContacts" type="submit" onsubmit="doSearch(); return false" class="search form-inline d-flex justify-content-center md-form form-sm">
                                     <i class="fas fa-search fa-2x" aria-hidden="true"></i>
                                     <input class="search form-control form-control-lg ml-3 w-75" type="text" id="SearchInput" placeholder="Search Contacts" aria-label="Search">
-                                </form> 
+                                </div> 
                               </div><br>
                             <table class="table" id="displayContacts">
                                 <thead class="thead-dark">
