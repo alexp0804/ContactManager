@@ -344,9 +344,11 @@ function readCookie()
 
 function doSearch()
 {
+    userId = readCookie();
+
     // Call search API and get resulting json
-    var search = document.getElementById("searchContacts").value;
-    var jsonPayload = '{ "userID": ' + userId + '", "search": ' + search + '" }';
+    var search = document.getElementById("SearchInput").value;
+    var jsonPayload = '{ "userID": "' + userId + '", "search": "' + search + '" }';
 
     var  url = urlBase + '/SearchContacts.' + extension;
     var xhr = new XMLHttpRequest();
