@@ -77,6 +77,15 @@ $(function() {
     })
 })
 
+// Hitting enter while selecting the search field emulates clicking the search button
+document.getElementById("SearchInput")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("SubmitSearch").click();
+    }
+});
+
 window.onload=function(){
     let passA = document.getElementById("registerPassword");
 	let passB = document.getElementById("confirmPassword");
