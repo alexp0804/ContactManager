@@ -368,7 +368,7 @@ function doSearch()
                 if (jsonObject.error == "")
                 {
                     // Clear table
-                    var table = document.getElementById("displayContacts");
+                    var table = document.getElementById("contactTable");
                     $("#displayContacts tbody tr").remove();
 
                     // Fill table with contacts
@@ -384,7 +384,7 @@ function doSearch()
                         // Fill the row with the relevant information
                         for (const field of info_fields)
                         {
-                            var cell = row.insertCell(0); 
+                            var cell = row.insertCell(-1); 
                             cell.innerHTML = contacts[i][field];
                         }
                     }
