@@ -28,21 +28,19 @@
                         <h1 class="header-text">Sign in</h1>
                         <p>View your account & utilize the Contact Manager</p>
     
-                        <form>
-                            <div class="form-group">
-                                <label for="username">USERNAME</label>
-                                <input type="text" class="form-control" id="username" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">PASSWORD</label>
-                                <input type="password" class="form-control" id="password" required>
-                            </div>
-                            <button id="login-submit" type="submit" class="btn btn-primary" onclick="doLogin();">Continue</button>
-                        </form>
-
+                        <div class="form-group">
+                            <label for="username">USERNAME</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">PASSWORD</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button id="login-submit" type="submit" class="btn btn-primary" onclick="doLogin();">Continue</button>
+        
                         <div class="form-error-text" id="login-error"></div>
 
-    
+                        <br>
                         <a id="signUp" href="#" class="no-account">Don't have an account? Sign Up!</a>
             
                     </div>
@@ -51,32 +49,33 @@
                         <h1 class="header-text">Create an Account</h1>
                         <p>You need an account to use the Contact Manager</p>
     
-                        <form>
-                            <div class="form-group">
-                                <label for="firstName">FIRST NAME <span style="color:#e63946">*</span></label>
-                                <input type="text" class="form-control" id="firstName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastName">LAST NAME <span style="color:#e63946">*</span></label>
-                                <input type="text" class="form-control" id="lastName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="username">USERNAME <span style="color:#e63946">*</span></label>
-                                <input type="text" class="form-control" id="registerUsername" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">PASSWORD <span style="color:#e63946">*</span></label>
-                                <input type="password" class="form-control" id="registerPassword" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">CONFIRM PASSWORD <span style="color:#e63946">*</span></label> <span class="no_match" id="match-result"></span>
-                                <input type="password" class="form-control" id="confirmPassword" required>
-                            </div>
-                            <button class="btn btn-primary" id="register-submit" onclick="doRegister();">Sign Up</button>
-                            <div class="form-error-text" id="register-error"></div>
-                        </form>
+                        <div class="form-group">
+                            <label for="firstName">FIRST NAME <span style="color:#e63946">*</span></label>
+                            <input type="text" class="form-control" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">LAST NAME <span style="color:#e63946">*</span></label>
+                            <input type="text" class="form-control" id="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">USERNAME <span style="color:#e63946">*</span></label>
+                            <input type="text" class="form-control" id="registerUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">PASSWORD <span style="color:#e63946">*</span></label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">CONFIRM PASSWORD <span style="color:#e63946">*</span></label> <span class="no_match" id="match-result"></span>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <button class="btn btn-primary" id="register-submit" onclick="doRegister();">Sign Up</button>
+                        <div class="form-error-text" id="register-error"></div>
+                
 
                         <div id="register-error"></div>
+
+                        <br>
     
                         <a id="signIn" href="#" class="no-account">Already have an account? Sign In!</a>
             
