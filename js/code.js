@@ -260,6 +260,8 @@ function doRegister()
 
 function doAddContact()
 {
+    userId = readCookie();
+
 	var firstname = document.getElementById("addFirstName").value;
 	var lastname = document.getElementById("addLastName").value;
 	var email = document.getElementById("addEmail").value;
