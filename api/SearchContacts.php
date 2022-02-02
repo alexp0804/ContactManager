@@ -42,7 +42,6 @@
 			returnWithInfo($searchResults);
 		}
 		
-		$stmt->close();
 		$conn->close();
 	}
 
@@ -60,7 +59,7 @@
 	function returnWithError($err)
 	{
 		$retValue = '{"error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
+		sendResultInfoAsJson($retValue);
 	}
 	
 	function returnWithInfo($searchResults)
