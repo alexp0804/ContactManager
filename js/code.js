@@ -29,6 +29,7 @@ $(function() {
 		$('.searchContacts').css('display', 'none');
 		$('.displayContactContainer').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
+		$('.editContact').css('display', 'none');
 		$('.addContact').css({
             'display': 'block',
             'margin-top': '10%',
@@ -38,10 +39,26 @@ $(function() {
 })
 
 $(function() {
+    $('#btnEditContact').on('click', function(e){
+		$('.searchContacts').css('display', 'none');
+		$('.addContact').css('display', 'none');
+		$('.displayContactContainer').css('display', 'none');
+		$('.aboutProject').css('display', 'none');
+		$('.editContact').css({
+            'display': 'block',
+            'margin-top': '10%',
+        });
+        e.preventDefault();
+        doSearch("");
+    })
+})
+
+$(function() {
     $('#btnDisplayContacts').on('click', function(e){
 		$('.searchContacts').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
+		$('.editContact').css('display', 'none');
 		$('.displayContactContainer').css({
             'display': 'block',
             'margin-top': '10%',
@@ -56,6 +73,7 @@ $(function() {
 		$('.searchContacts').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
+		$('.editContact').css('display', 'none');
 		$('.displayContactContainer').css({
             'display': 'block',
             'margin-top': '10%',
@@ -70,6 +88,7 @@ $(function() {
 		$('.displayContactContainer').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.searchContacts').css('display', 'none');
+		$('.editContact').css('display', 'none');
 		$('.aboutProject').css({
             'display': 'block',
             'margin-top': '10%',
@@ -305,6 +324,10 @@ function doAddContact()
 					if (jsonObject.error == "")
 					{
 						document.getElementById("addingResult").innerHTML = "Contact has been added";
+						//clears up the alert after 5 seconds
+						setTimeout(function() {
+							document.getElementById("addingResult").innerHTML = "";
+						}, 5000);
 					}
 					else
 					{
