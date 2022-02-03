@@ -47,6 +47,7 @@ $(function() {
             'margin-top': '10%',
         });
         e.preventDefault();
+        doSearch("");
     })
 })
 
@@ -87,9 +88,9 @@ document.getElementById("SearchInput")
 });
 
 // If search field becomes empty refresh the table
-document.getElementById("SearchInput")
-    .addEventListener("keyup", function() {
-        if (document.getElementById("SearchInput").value == "") {
+var SearchInput = document.getElementById("SearchInput");
+SearchInput.addEventListener("input", (event) => {
+        if (SearchInput.value == "") {
             doSearch("");
         }
 });
@@ -318,8 +319,6 @@ function doAddContact()
 	{
 		document.getElementById("addingResult").innerHTML = err.message;
 	}
-        
-    doSearch("");
 }
 
 function saveCookie()
@@ -366,7 +365,7 @@ function readCookie()
 	return userId;
 }
 
-function doSearch();
+function doSearch()
 {
     doSearch(document.getElementById("SearchInput").value);
 }
