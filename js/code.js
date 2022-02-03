@@ -87,6 +87,8 @@ document.getElementById("SearchInput")
 });
 
 window.onload=function(){
+	doSearch();
+
     let passA = document.getElementById("registerPassword");
 	let passB = document.getElementById("confirmPassword");
 	let matchResult = document.getElementById("match-result");
@@ -395,7 +397,16 @@ function doSearch()
                         {
                             var cell = row.insertCell(-1); 
                             cell.innerHTML = contacts[i][field];
-                        }
+						}
+						
+						
+						var editIcon = row.insertCell(4);
+                        editIcon.innerHTML = "<td>" + "<a href='#' id='btnEditContact'><i style='color:rgb(100, 100, 100);' class='fas fa-pencil'></i></a>" + "</td>";
+
+                        var deleteIcon = row.insertCell(5);
+                        deleteIcon.innerHTML = "<td>" + "<a href='#' onclick='doDeleteContact(" + contacts[i] + ")'; id='btnEraseContact'><i style='color:rgb(196, 90, 90);' class='fas fa-trash-alt'></i></a>" + "</td>";
+                    
+
                     }
                 }
             }
@@ -408,25 +419,4 @@ function doSearch()
         return;	
     }
 }
-
-
-/*function doPartialSearch()
-{
-    var input, filter, table, tr, td, i;
-    input = document.getElementById("SearchInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("displayContacts");
-    tr = table.getElementsByTagName("tr");
-    for (i = 0; i < tr.length; i++){
-        td = tr[i].getElementsByTagName("td")[0];
-        if (td) {
-            if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
-        }
-    }
-}
-*/
 
