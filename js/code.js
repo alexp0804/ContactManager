@@ -468,6 +468,7 @@ function doSearch(search)
 function doEdit(element)
 {
     var row = element.parentNode.parentNode.parentNode;
+    row.style.background = "#e9e9e9";
     var cells = row.children;
 
     // -4 to not make ID, userID, edit or delete button editable
@@ -492,6 +493,7 @@ function doEdit(element)
 function finishEdit(element)
 {
     var row = element.parentNode.parentNode.parentNode;
+    row.style.background = "#f0f0f0";
     var cells = row.children;
 
     for (var i = 0; i < cells.length - 4; i++)
