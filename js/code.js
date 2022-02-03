@@ -86,6 +86,15 @@ document.getElementById("SearchInput")
     }
 });
 
+// If search field becomes empty refresh the table
+document.getElementById("SearchInput")
+    .addEventListener("keyup", function() {
+        if (document.getElementById("SearchInput").value == "") {
+            doSearch("");
+        }
+});
+
+
 window.onload=function(){
 	doSearch();
 
@@ -309,6 +318,8 @@ function doAddContact()
 	{
 		document.getElementById("addingResult").innerHTML = err.message;
 	}
+        
+    doSearch("");
 }
 
 function saveCookie()
@@ -355,12 +366,16 @@ function readCookie()
 	return userId;
 }
 
-function doSearch()
+function doSearch();
+{
+    doSearch(document.getElementById("SearchInput").value);
+}
+
+function doSearch(search)
 {
     userId = readCookie();
 
     // Call search API and get resulting json
-    var search = document.getElementById("SearchInput").value;
     var jsonPayload = '{ "userID": "' + userId + '", "search": "' + search + '" }';
 
     var  url = urlBase + '/SearchContacts.' + extension;
