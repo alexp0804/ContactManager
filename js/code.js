@@ -398,7 +398,7 @@ function doSearch(search)
 
                     // Fill table with contacts
                     var contacts = jsonObject.results;
-                    var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER"];
+                    var info_fields = ["ID", "USERID", "FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER"];
 
                     // For each of the contacts
                     for (var i = 0; i < contacts.length; i++)
@@ -414,10 +414,10 @@ function doSearch(search)
 						}
 						
 						
-						var editIcon = row.insertCell(4);
+						var editIcon = row.insertCell(6);
                         editIcon.innerHTML = "<td>" + "<a href='#' id='btnEditContact'><i style='color:rgb(100, 100, 100);' class='fas fa-pencil'></i></a>" + "</td>";
 
-                        var deleteIcon = row.insertCell(5);
+                        var deleteIcon = row.insertCell(7);
                         deleteIcon.innerHTML = "<td>" + "<a href='#' onclick='doDeleteContact(" + contacts[i] + ")'; id='btnEraseContact'><i style='color:rgb(196, 90, 90);' class='fas fa-trash-alt'></i></a>" + "</td>";
                     
 
