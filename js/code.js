@@ -305,6 +305,10 @@ function doAddContact()
 					if (jsonObject.error == "")
 					{
 						document.getElementById("addingResult").innerHTML = "Contact has been added";
+						//clears up the alert after 5 seconds
+						setTimeout(function() {
+							document.getElementById("addingResult").innerHTML = "";
+						}, 5000);
 					}
 					else
 					{
