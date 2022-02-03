@@ -113,6 +113,32 @@
                         </div>
                     </div>
 
+                    <div class="editContact">
+                      <h3>Edit Contact</h3>
+                      <div id="editContact">
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="addFirstName">FIRST NAME</label>
+                              <input type="text" class="form-control" id="editFirstName">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="addLastName">LAST NAME</label>
+                              <input type="text" class="form-control" id="editLastName">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="addEmail">EMAIL</label>
+                              <input type="email" class="form-control" id="editEmail">
+                          </div>
+                          <div class="form-group">
+                              <label for="phone">PHONE NUMBER</label>
+                              <input class="form-control" type="tel" id="editPhone" name="phone">
+                          </div>
+                          <button type="submit" class="btn btn-primary" onclick="doEditContact(); clearForms();">Edit Contact</button>
+                          <div class="form-error-text" id="editingResult"></div>
+                      </div>
+                  </div>
+
                        <!-- All Contacts -->
                     <div class="displayContacts">
                         <div class="displayContactContainer">
