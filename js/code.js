@@ -97,7 +97,7 @@ SearchInput.addEventListener("input", (event) => {
 
 
 window.onload=function(){
-	doSearch();
+	doSearch("");
 
     let passA = document.getElementById("registerPassword");
 	let passB = document.getElementById("confirmPassword");
