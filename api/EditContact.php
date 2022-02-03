@@ -39,7 +39,7 @@
                     LastName='$newLastName',
                     Email='$newEmail',
                     PhoneNumber='$newPhone'
-                    where UserID='$userId' and ContactID='$contactId'";
+                    where UserID='$userId' and ID='$contactId'";
 
             if ($result = $conn->query($sql) != true)
             {
