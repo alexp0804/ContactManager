@@ -512,7 +512,7 @@ function finishEdit(element)
 
     var jsonPayload = JSON.stringify(tmp);
 
-	var url = urlBase + '/Login.' + extension;
+	var url = urlBase + '/EditContact.' + extension;
 	var xhr = new XMLHttpRequest();
  	xhr.open("POST", url, false);
  	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
