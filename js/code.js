@@ -434,6 +434,10 @@ function doSearch(search)
                         {
                             var cell = row.insertCell(-1); 
                             cell.innerHTML = contacts[i][field];
+                            if (field == "ID" || field == "USERID")
+                            {
+                                cell.style.display = "none";
+                            }
 						}
 						
 						
