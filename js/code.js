@@ -421,7 +421,7 @@ function doSearch(search)
 
                     // Fill table with contacts
                     var contacts = jsonObject.results;
-                    var info_fields = ["FIRSTNAME", "ID", "USERID", "LASTNAME", "EMAIL", "PHONENUMBER"];
+                    var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER", "ID", "USERID"];
 
                     // For each of the contacts
                     for (var i = 0; i < contacts.length; i++)
@@ -440,9 +440,8 @@ function doSearch(search)
                             }
 						}
 						
-						
 						var editIcon = row.insertCell(6);
-                        editIcon.innerHTML = "<td>" + "<a href='#' id='btnEditContact'><i style='color:rgb(100, 100, 100);' class='fas fa-pencil'></i></a>" + "</td>";
+                        editIcon.innerHTML = '<td>' +'<div id="edit">' + '<i onclick="doEdit(this);" style="color:rgb(100,100,100);" class="fas fa-pencil"></i>' + '<i onclick="finishEdit(this);" style="display:none; color:green;" class="fas fa-check-square"></i>' '</div>' + '</td>';
 
                         var deleteIcon = row.insertCell(7);
                         deleteIcon.innerHTML = "<td>" + "<a href='#' onclick='doDeleteContact(" + contacts[i] + ")'; id='btnEraseContact'><i style='color:rgb(196, 90, 90);' class='fas fa-trash-alt'></i></a>" + "</td>";
@@ -459,6 +458,79 @@ function doSearch(search)
     {
         return;	
     }
+}
+
+function doEdit(element)
+{
+    var row = element.parentNode.parentNode.parentNode;
+    var cells = row.children;
+
+    // -4 to not make ID, userID, edit or delete button editable
+    for (var i = 0; i < cells.length - 4; i++)
+        cells[i].setAttribute("contenteditable", "true"); 
+
+    // Remove the edit button and replace with confirm button
+    var buttons = element.parentNode.children;
+    element.style.display = "none";
+    buttons[1].style.display = "";
+
+
+}
+
+// newFirstName
+// newLastName
+// newEmail
+// newPhone
+// userID
+// contID
+
+function finishEdit(element)
+{
+    var row = element.parentNode.parentNode.parentNode;
+    var cells = row.children;
+
+    for (var i = 0; i < cells.length - 4; i++)
+        cells[i].setAttribute("contenteditable", "false");
+    
+    // Remove confirmation button and replace with edit button
+    var buttons = element.parentNode.children;
+    element.style.display = "none";
+    buttons[0].style.display = "";
+
+    // Package info into json
+    var tmp = { newFirstName: cells[0].innerHTML, 
+                newLastName: cells[1].innerHTML,
+                newEmail: cells[2].innerHTML,
+                newPhone: cells[3].innerHTML,
+                contID: cells[4].innerHTML,
+                userID: cells[5].innerHTML };
+
+    var jsonPayload = JSON.stringify(tmp);
+
+	var url = urlBase + '/Login.' + extension;
+	var xhr = new XMLHttpRequest();
+ 	xhr.open("POST", url, false);
+ 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+	try
+	{
+		// Send and recieve the payload.
+		xhr.send(jsonPayload);
+		var jsonObject = JSON.parse(xhr.responseText);
+        if (jsonObject.error != "")
+        {
+            return false;
+        }
+	}
+	catch(err)
+	{
+        return false;
+	}
+}
+
+function doDelete()
+{
+
 }
 
 function clearForms()
