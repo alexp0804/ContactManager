@@ -434,3 +434,15 @@ function doSearch(search)
     }
 }
 
+function clearForms()
+{
+    forms = ["addFirstName", "addLastName", "addEmail", "phone"];
+
+    for (const form of forms)
+    {
+        var el = document.getElementById(form);
+        el.value = "";
+    }
+
+    return false;
+}
