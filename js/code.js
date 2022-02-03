@@ -421,7 +421,7 @@ function doSearch(search)
 
                     // Fill table with contacts
                     var contacts = jsonObject.results;
-                    var info_fields = ["ID", "USERID", "FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER"];
+                    var info_fields = ["FIRSTNAME", "ID", "USERID", "LASTNAME", "EMAIL", "PHONENUMBER"];
 
                     // For each of the contacts
                     for (var i = 0; i < contacts.length; i++)
