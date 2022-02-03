@@ -365,7 +365,7 @@ function readCookie()
 	return userId;
 }
 
-function doSearch()
+function callSearch()
 {
     doSearch(document.getElementById("SearchInput").value);
 }
