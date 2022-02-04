@@ -109,9 +109,7 @@ document.getElementById("SearchInput")
 // If search field becomes empty refresh the table
 var SearchInput = document.getElementById("SearchInput");
 SearchInput.addEventListener("input", (event) => {
-        if (SearchInput.value == "") {
-            doSearch("");
-        }
+    doSearch(SearchInput.value);
 });
 
 
@@ -485,13 +483,6 @@ function doEdit(element)
 
 
 }
-
-// newFirstName
-// newLastName
-// newEmail
-// newPhone
-// userID
-// contID
 
 function finishEdit(element)
 {
