@@ -5,6 +5,8 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="css/contacts.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <script type="text/javascript" src="js/code.js"></script>
         <script>
           if (readCookie() === null) {
               window.location.href = "index.html";
@@ -61,9 +63,10 @@
                 </div>
 
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <!-- Add Contact form -->
                 <div class="well">
+                  <div class="alert alert-success d-none" role="alert" id="addingResult"></div>
                     <div class="addContact">
                         <h3>Add New Contact</h3>
                         <div id="addContact">
@@ -86,7 +89,7 @@
                                 <input class="form-control" type="tel" id="phone" name="phone">
                             </div>
                             <button type="submit" class="btn btn-primary" onclick="doAddContact(); clearForms();">Add Contact</button>
-                            <div class="form-error-text" id="addingResult"></div>
+                            <!--<div class="form-error-text" id="addingResult"></div>-->
                         </div>
                     </div>
 
@@ -100,9 +103,9 @@
                                     <input class="search form-control form-control-lg ml-3 w-75" type="text" id="SearchInput" placeholder="Search Contacts" aria-label="Search">
                                 </div> 
                               </div><br>
-                            <table class="table" id="displayContacts">
+                            <table class="table sortable" id="displayContacts">
                                 <thead class="thead-dark">
-                                <tr>
+                                <tr class="item">
                                     <th scope="col">First</th>
                                     <th scope="col">Last</th>
                                     <th scope="col">Email</th>
@@ -136,8 +139,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-1">
-            </div>
+    
           </div>
         
     </body>

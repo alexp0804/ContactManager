@@ -8,6 +8,7 @@ html, body {
 body {
     background: #f0f0f0;
 }
+
 h1, h2, h3, h4 {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -214,4 +215,11 @@ label {
 .aboutProject {
     margin-top:10%;
     display:none;
+}
+
+#addingResult {
+    position:fixed; 
+    top: 15px; 
+    width: 55%;
+    z-index:9999; 
 }
