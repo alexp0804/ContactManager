@@ -391,6 +391,21 @@ function callSearch()
     doSearch(document.getElementById("SearchInput").value);
 }
 
+function compare(a, b)
+{
+    if (a[FIRSTNAME] < b[FIRSTNAME])
+    {
+        return -1;
+    }
+    else if (a[FIRSTNAME] > b[FIRSTNAME])
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
+
 function doSearch(search)
 {
     userId = readCookie();
@@ -419,6 +434,8 @@ function doSearch(search)
                 {
                     // Fill table with contacts
                     var contacts = jsonObject.results;
+                    contacts.sort(compare);
+
                     var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER", "ID", "USERID"];
 
                     // For each of the contacts
@@ -446,10 +463,13 @@ function doSearch(search)
                                                  + '</div>'
                                              + '</td>';
 
-                        var deleteIcon = row.insertCell(7);
-                        deleteIcon.innerHTML = "<td>" + "<a href='#' onclick='doDeleteContact(" + contacts[i] + ")'; id='btnEraseContact'><i style='color:rgb(196, 90, 90);' class='fas fa-trash-alt'></i></a>" + "</td>";
-                    
 
+                        var deleteIcon = row.insertCell(7);
+                        editIcon.innerHTML = '<td>'
+                                                 + '<div id="delete">'
+                                                     + '<i onclick="doDelete(this);" style="color:rgb(196,90,90);" class="fas fa-trash-alt"></i>'
+                                                 + '</div>'
+                                             + '</td>';
                     }
                 }
             }
@@ -533,9 +553,39 @@ function finishEdit(element)
 	}
 }
 
-function doDelete()
+function doDelete(element)
 {
+    if (!confirm("Delete this contact?")) {
+        return;
+    }
 
+    var row = element.parentNode.parentNode.parentNode;
+
+    // Hide row
+    row.setAttribute("display", "none"); 
+
+    // Delete from database
+    var tmp = { contFirstName: cells[0].innerHTML, 
+                contLastName: cells[1].innerHTML,
+                contEmail: cells[2].innerHTML,
+                contPhone: cells[3].innerHTML,
+                contUserID: cells[5].innerHTML };
+
+    var jsonPayload = JSON.stringify(tmp);
+    
+    var url = urlBase + '/EditContact.' + extension;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try
+    {
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        return;
+    }
 }
 
 function clearForms()
