@@ -450,7 +450,7 @@ function doSearch(search)
 
 
                         var deleteIcon = row.insertCell(7);
-                        editIcon.innerHTML = '<td>'
+                        deleteIcon.innerHTML = '<td>'
                                                  + '<div id="delete">'
                                                      + '<i onclick="doDelete(this);" style="color:rgb(196,90,90);" class="fas fa-trash-alt"></i>'
                                                  + '</div>'
