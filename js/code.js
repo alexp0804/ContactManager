@@ -484,13 +484,6 @@ function doEdit(element)
 
 }
 
-// newFirstName
-// newLastName
-// newEmail
-// newPhone
-// userID
-// contID
-
 function finishEdit(element)
 {
     var row = element.parentNode.parentNode.parentNode;
@@ -504,6 +497,10 @@ function finishEdit(element)
     var buttons = element.parentNode.children;
     element.style.display = "none";
     buttons[0].style.display = "";
+    
+    // Remove all <br> from innerHTMLs
+    for (var i = 0; i < cells.length - 4; i++)
+        cells[i].innerHTML == cells[i].innerHTML.replace(/\<br\>/g, "");
 
     // Package info into json
     var tmp = { newFirstName: cells[0].innerHTML, 
@@ -529,6 +526,7 @@ function finishEdit(element)
         {
             return false;
         }
+        xhr.send(jsonPayload);
 	}
 	catch(err)
 	{
@@ -543,9 +541,10 @@ function doDelete(element)
     }
 
     var row = element.parentNode.parentNode.parentNode;
+    var cells = row.children;
 
     // Hide row
-    row.setAttribute("display", "none"); 
+    row.setAttribute("hidden", "hidden"); 
 
     // Delete from database
     var tmp = { contFirstName: cells[0].innerHTML, 
@@ -555,12 +554,12 @@ function doDelete(element)
                 contUserID: cells[5].innerHTML };
 
     var jsonPayload = JSON.stringify(tmp);
+    jsonPayload = jsonPayload.replace(/\<br\>/g, "");
     
-    var url = urlBase + '/EditContact.' + extension;
+    var url = urlBase + '/DeleteContact.' + extension;
     var xhr = new XMLHttpRequest();
     xhr.open("POST", url, false);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
     try
     {
         xhr.send(jsonPayload);
@@ -569,6 +568,7 @@ function doDelete(element)
     {
         return;
     }
+
 }
 
 function clearForms()
