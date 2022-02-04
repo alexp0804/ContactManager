@@ -433,4 +433,3 @@ function doSearch(search)
         return;	
     }
 }
-
