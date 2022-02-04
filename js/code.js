@@ -1,4 +1,4 @@
-var urlBase = 'http://cop4331-g1.xyz/api';
+var urlBase = 'http://sakuns-macbook-pro.local/api';
 var extension = 'php';
 
 var userId = 0;
@@ -138,6 +138,7 @@ window.onload=function(){
 
 	passB.addEventListener('keyup', checkPass);
 
+
 }
 
 // remove spaces & allow using 'enter' to submit form
@@ -209,6 +210,12 @@ $(function() {
 			this.value = this.value.replace(/\s/g, "");
 		}
 	})
+
+	document.getElementById('contactTable').addEventListener('keydown', (evt) => {
+		if (evt.keyCode === 13) {
+			evt.preventDefault();
+		}
+	});
 });
 
 // login
@@ -321,10 +328,12 @@ function doAddContact()
 				
 					if (jsonObject.error == "")
 					{
-						document.getElementById("addingResult").innerHTML = "Contact has been added";
+						document.getElementById("addingResult").innerHTML = "You have successfully added a contact!";
+						$('#addingResult').removeClass('d-none');
 						//clears up the alert after 5 seconds
 						setTimeout(function() {
-							document.getElementById("addingResult").innerHTML = "";
+							//document.getElementById("addingResult").innerHTML = "";
+							$('#addingResult').addClass('d-none');
 						}, 5000);
 					}
 					else
@@ -419,8 +428,6 @@ function doSearch(search)
 
                     // Fill table with contacts
                     var contacts = jsonObject.results;
-			//attempt of sorting that at least doesn't wipe the contacts away
-			contacts.sort(function(a, b){return a-b});
                     var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER", "ID", "USERID"];
 
                     // For each of the contacts
@@ -443,8 +450,8 @@ function doSearch(search)
 						var editIcon = row.insertCell(6);
                         editIcon.innerHTML = '<td>'
                                                  + '<div id="edit">'
-                                                     + '<i onclick="doEdit(this);" style="color:rgb(100,100,100);" class="fas fa-pencil"></i>'
-                                                     + '<i onclick="finishEdit(this);" style="display:none; color:green;" class="fas fa-check-square"></i>'
+                                                     + '<i onclick="doEdit(this);" style="color:rgb(100,100,100); cursor: pointer;" class="fas fa-pencil"></i>'
+                                                     + '<i onclick="finishEdit(this);" style="display:none; color:#5ac47a; cursor: pointer;" class="fas fa-check-square"></i>'
                                                  + '</div>'
                                              + '</td>';
 
@@ -452,7 +459,7 @@ function doSearch(search)
                         var deleteIcon = row.insertCell(7);
                         deleteIcon.innerHTML = '<td>'
                                                  + '<div id="delete">'
-                                                     + '<i onclick="doDelete(this);" style="color:rgb(196,90,90);" class="fas fa-trash-alt"></i>'
+                                                     + '<i onclick="doDelete(this);" style="color:rgb(196,90,90); cursor: pointer;" class="fas fa-trash-alt"></i>'
                                                  + '</div>'
                                              + '</td>';
                     }
