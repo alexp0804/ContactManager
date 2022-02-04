@@ -25,7 +25,7 @@
     else
     {
         // Check that entry exists
-        $sql = "SELECT * FROM CONTACTS WHERE CONTACTID = '$contactId' AND USERID = '$userId'";
+        $sql = "SELECT * FROM CONTACTS WHERE ID = '$contactId' AND USERID = '$userId'";
         $result = $conn->query($sql);
         if ($result->num_rows != 1)
         {
@@ -39,7 +39,7 @@
                     LastName='$newLastName',
                     Email='$newEmail',
                     PhoneNumber='$newPhone'
-                    where UserID='$userId' and ContactID='$contactId'";
+                    where UserID='$userId' and ID='$contactId'";
 
             if ($result = $conn->query($sql) != true)
             {
