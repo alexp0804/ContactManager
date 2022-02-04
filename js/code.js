@@ -391,6 +391,21 @@ function callSearch()
     doSearch(document.getElementById("SearchInput").value);
 }
 
+function compare(a, b)
+{
+    if (a[FIRSTNAME] < b[FIRSTNAME])
+    {
+        return -1;
+    }
+    else if (a[FIRSTNAME] > b[FIRSTNAME])
+    {
+        return 1;
+    }
+
+    return 0;
+}
+
+
 function doSearch(search)
 {
     userId = readCookie();
@@ -419,6 +434,8 @@ function doSearch(search)
                 {
                     // Fill table with contacts
                     var contacts = jsonObject.results;
+                    contacts.sort(compare);
+
                     var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER", "ID", "USERID"];
 
                     // For each of the contacts
