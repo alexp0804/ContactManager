@@ -109,7 +109,9 @@ document.getElementById("SearchInput")
 // If search field becomes empty refresh the table
 var SearchInput = document.getElementById("SearchInput");
 SearchInput.addEventListener("input", (event) => {
-    doSearch(SearchInput.value);
+        if (SearchInput.value == "") {
+            doSearch("");
+        }
 });
 
 
@@ -411,12 +413,12 @@ function doSearch(search)
             {
                 var jsonObject = JSON.parse(xhr.responseText);
                 
-                // Clear table
-                var table = document.getElementById("contactTable");
-                $("#displayContacts tbody tr").remove();
-                
                 if (jsonObject.error == "")
                 {
+                    // Clear table
+                    var table = document.getElementById("contactTable");
+                    $("#displayContacts tbody tr").remove();
+
                     // Fill table with contacts
                     var contacts = jsonObject.results;
                     var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER", "ID", "USERID"];
@@ -446,10 +448,13 @@ function doSearch(search)
                                                  + '</div>'
                                              + '</td>';
 
-                        var deleteIcon = row.insertCell(7);
-                        deleteIcon.innerHTML = "<td>" + "<a href='#' onclick='doDeleteContact(" + contacts[i] + ")'; id='btnEraseContact'><i style='color:rgb(196, 90, 90);' class='fas fa-trash-alt'></i></a>" + "</td>";
-                    
 
+                        var deleteIcon = row.insertCell(7);
+                        editIcon.innerHTML = '<td>'
+                                                 + '<div id="delete">'
+                                                     + '<i onclick="doDelete(this);" style="color:rgb(196,90,90);" class="fas fa-trash-alt"></i>'
+                                                 + '</div>'
+                                             + '</td>';
                     }
                 }
             }
@@ -462,8 +467,6 @@ function doSearch(search)
         return;	
     }
 }
-<<<<<<< HEAD
-=======
 
 function doEdit(element)
 {
@@ -535,9 +538,39 @@ function finishEdit(element)
 	}
 }
 
-function doDelete()
+function doDelete(element)
 {
+    if (!confirm("Delete this contact?")) {
+        return;
+    }
 
+    var row = element.parentNode.parentNode.parentNode;
+
+    // Hide row
+    row.setAttribute("display", "none"); 
+
+    // Delete from database
+    var tmp = { contFirstName: cells[0].innerHTML, 
+                contLastName: cells[1].innerHTML,
+                contEmail: cells[2].innerHTML,
+                contPhone: cells[3].innerHTML,
+                contUserID: cells[5].innerHTML };
+
+    var jsonPayload = JSON.stringify(tmp);
+    
+    var url = urlBase + '/EditContact.' + extension;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, false);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try
+    {
+        xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+        return;
+    }
 }
 
 function clearForms()
@@ -552,4 +585,3 @@ function clearForms()
 
     return false;
 }
->>>>>>> 65f47aa42f8ef85ddc657f6d2f56aa03638f58aa
