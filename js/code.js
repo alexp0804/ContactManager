@@ -419,6 +419,7 @@ function doSearch(search)
 
                     // Fill table with contacts
                     var contacts = jsonObject.results;
+			//attempt of sorting that at least doesn't wipe the contacts away
 			contacts.sort(function(a, b){return a-b});
                     var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER", "ID", "USERID"];
 
