@@ -1,4 +1,4 @@
-var urlBase = 'http://cop4331-g1.xyz/api';
+var urlBase = 'http://sakuns-macbook-pro.local/api';
 var extension = 'php';
 
 var userId = 0;
