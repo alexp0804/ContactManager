@@ -29,7 +29,6 @@ $(function() {
 		$('.searchContacts').css('display', 'none');
 		$('.displayContactContainer').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
-		$('.editContact').css('display', 'none');
 		$('.addContact').css({
             'display': 'block',
             'margin-top': '10%',
@@ -39,26 +38,10 @@ $(function() {
 })
 
 $(function() {
-    $('#btnEditContact').on('click', function(e){
-		$('.searchContacts').css('display', 'none');
-		$('.addContact').css('display', 'none');
-		$('.displayContactContainer').css('display', 'none');
-		$('.aboutProject').css('display', 'none');
-		$('.editContact').css({
-            'display': 'block',
-            'margin-top': '10%',
-        });
-        e.preventDefault();
-        doSearch("");
-    })
-})
-
-$(function() {
     $('#btnDisplayContacts').on('click', function(e){
 		$('.searchContacts').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
-		$('.editContact').css('display', 'none');
 		$('.displayContactContainer').css({
             'display': 'block',
             'margin-top': '10%',
@@ -73,7 +56,6 @@ $(function() {
 		$('.searchContacts').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.aboutProject').css('display', 'none');
-		$('.editContact').css('display', 'none');
 		$('.displayContactContainer').css({
             'display': 'block',
             'margin-top': '10%',
@@ -88,7 +70,6 @@ $(function() {
 		$('.displayContactContainer').css('display', 'none');
 		$('.addContact').css('display', 'none');
 		$('.searchContacts').css('display', 'none');
-		$('.editContact').css('display', 'none');
 		$('.aboutProject').css({
             'display': 'block',
             'margin-top': '10%',
@@ -109,12 +90,14 @@ document.getElementById("SearchInput")
 // If search field becomes empty refresh the table
 var SearchInput = document.getElementById("SearchInput");
 SearchInput.addEventListener("input", (event) => {
-    doSearch(SearchInput.value);
+        if (SearchInput.value == "") {
+            doSearch("");
+        }
 });
 
 
 window.onload=function(){
-	doSearch("");
+	doSearch();
 
     let passA = document.getElementById("registerPassword");
 	let passB = document.getElementById("confirmPassword");
@@ -322,10 +305,6 @@ function doAddContact()
 					if (jsonObject.error == "")
 					{
 						document.getElementById("addingResult").innerHTML = "Contact has been added";
-						//clears up the alert after 5 seconds
-						setTimeout(function() {
-							document.getElementById("addingResult").innerHTML = "";
-						}, 5000);
 					}
 					else
 					{
@@ -386,7 +365,7 @@ function readCookie()
 	return userId;
 }
 
-function callSearch()
+function doSearch()
 {
     doSearch(document.getElementById("SearchInput").value);
 }
@@ -426,17 +405,15 @@ function doSearch(search)
             {
                 var jsonObject = JSON.parse(xhr.responseText);
                 
-                // Clear table
-                var table = document.getElementById("contactTable");
-                $("#displayContacts tbody tr").remove();
-                
                 if (jsonObject.error == "")
                 {
+                    // Clear table
+                    var table = document.getElementById("contactTable");
+                    $("#displayContacts tbody tr").remove();
+
                     // Fill table with contacts
                     var contacts = jsonObject.results;
-                    contacts.sort(compare);
-
-                    var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER", "ID", "USERID"];
+                    var info_fields = ["FIRSTNAME", "LASTNAME", "EMAIL", "PHONENUMBER"];
 
                     // For each of the contacts
                     for (var i = 0; i < contacts.length; i++)
@@ -449,21 +426,13 @@ function doSearch(search)
                         {
                             var cell = row.insertCell(-1); 
                             cell.innerHTML = contacts[i][field];
-                            if (field == "ID" || field == "USERID")
-                            {
-                                cell.style.display = "none";
-                            }
 						}
 						
-						var editIcon = row.insertCell(6);
-                        editIcon.innerHTML = '<td>'
-                                                 + '<div id="edit">'
-                                                     + '<i onclick="doEdit(this);" style="color:rgb(100,100,100);" class="fas fa-pencil"></i>'
-                                                     + '<i onclick="finishEdit(this);" style="display:none; color:green;" class="fas fa-check-square"></i>'
-                                                 + '</div>'
-                                             + '</td>';
+						
+						var editIcon = row.insertCell(4);
+                        editIcon.innerHTML = "<td>" + "<a href='#' id='btnEditContact'><i style='color:rgb(100, 100, 100);' class='fas fa-pencil'></i></a>" + "</td>";
 
-                        var deleteIcon = row.insertCell(7);
+                        var deleteIcon = row.insertCell(5);
                         deleteIcon.innerHTML = "<td>" + "<a href='#' onclick='doDeleteContact(" + contacts[i] + ")'; id='btnEraseContact'><i style='color:rgb(196, 90, 90);' class='fas fa-trash-alt'></i></a>" + "</td>";
                     
 
@@ -479,94 +448,3 @@ function doSearch(search)
         return;	
     }
 }
-<<<<<<< HEAD
-=======
-
-function doEdit(element)
-{
-    var row = element.parentNode.parentNode.parentNode;
-    row.style.background = "#e9e9e9";
-    var cells = row.children;
-
-    // -4 to not make ID, userID, edit or delete button editable
-    for (var i = 0; i < cells.length - 4; i++)
-        cells[i].setAttribute("contenteditable", "true"); 
-
-    // Remove the edit button and replace with confirm button
-    var buttons = element.parentNode.children;
-    element.style.display = "none";
-    buttons[1].style.display = "";
-
-
-}
-
-// newFirstName
-// newLastName
-// newEmail
-// newPhone
-// userID
-// contID
-
-function finishEdit(element)
-{
-    var row = element.parentNode.parentNode.parentNode;
-    row.style.background = "#f0f0f0";
-    var cells = row.children;
-
-    for (var i = 0; i < cells.length - 4; i++)
-        cells[i].setAttribute("contenteditable", "false");
-    
-    // Remove confirmation button and replace with edit button
-    var buttons = element.parentNode.children;
-    element.style.display = "none";
-    buttons[0].style.display = "";
-
-    // Package info into json
-    var tmp = { newFirstName: cells[0].innerHTML, 
-                newLastName: cells[1].innerHTML,
-                newEmail: cells[2].innerHTML,
-                newPhone: cells[3].innerHTML,
-                contID: cells[4].innerHTML,
-                userID: cells[5].innerHTML };
-
-    var jsonPayload = JSON.stringify(tmp);
-
-	var url = urlBase + '/EditContact.' + extension;
-	var xhr = new XMLHttpRequest();
- 	xhr.open("POST", url, false);
- 	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-	try
-	{
-		// Send and recieve the payload.
-		xhr.send(jsonPayload);
-		var jsonObject = JSON.parse(xhr.responseText);
-        if (jsonObject.error != "")
-        {
-            return false;
-        }
-	}
-	catch(err)
-	{
-        return false;
-	}
-}
-
-function doDelete()
-{
-
-}
-
-function clearForms()
-{
-    forms = ["addFirstName", "addLastName", "addEmail", "phone"];
-
-    for (const form of forms)
-    {
-        var el = document.getElementById(form);
-        el.value = "";
-    }
-
-    return false;
-}
->>>>>>> 65f47aa42f8ef85ddc657f6d2f56aa03638f58aa

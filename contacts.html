@@ -10,6 +10,25 @@
               window.location.href = "index.html";
           }
 
+       /* function doPartialSearch()
+        {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("SearchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("displayContacts");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++){
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }*/
+
         </script>
     </head>
 
@@ -58,10 +77,14 @@
                         </li>
                       </ul>
                     </nav>
-                </div>
+                  </div>
 
             </div>
             <div class="col-md-10">
+            
+                
+                
+
                 <!-- Add Contact form -->
                 <div class="well">
                     <div class="addContact">
@@ -85,18 +108,18 @@
                                 <label for="phone">PHONE NUMBER</label>
                                 <input class="form-control" type="tel" id="phone" name="phone">
                             </div>
-                            <button type="submit" class="btn btn-primary" onclick="doAddContact(); clearForms();">Add Contact</button>
+                            <button type="submit" class="btn btn-primary" onclick="doAddContact();">Add Contact</button>
                             <div class="form-error-text" id="addingResult"></div>
                         </div>
                     </div>
 
-                    <!-- All Contacts -->
+                       <!-- All Contacts -->
                     <div class="displayContacts">
                         <div class="displayContactContainer">
                             <h3>All Contacts</h3>
                             <div class="search">
                                 <div id="searchContacts" type="submit" class="search form-inline d-flex justify-content-center md-form form-sm">
-                                    <i onclick="callSearch();" id="SubmitSearch" class="fas fa-search fa-2x" aria-hidden="true"></i>
+                                    <i onclick="doSearch();" id="SubmitSearch" class="fas fa-search fa-2x" aria-hidden="true"></i>
                                     <input class="search form-control form-control-lg ml-3 w-75" type="text" id="SearchInput" placeholder="Search Contacts" aria-label="Search">
                                 </div> 
                               </div><br>
@@ -107,13 +130,27 @@
                                     <th scope="col">Last</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Phone</th>
-                                    <th style="display:none;" scope="col"></th>
-                                    <th style="display:none;" scope="col"></th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
                                 <tbody id="contactTable">
+                                <!--<tr>
+                                    <td>Sakun</td>
+                                    <td>Chitraacharige</td>
+                                    <td>sakun@knights.ucf.edu</td>
+                                    <td>123-456-7890</td>
+                                    <td><a href="#" id="btnEditContact"><i style="color:rgb(100, 100, 100);" class="fas fa-pencil"></i></a></td>
+                                    <td><i style="color:rgb(196, 90, 90);" class="fas fa-trash-alt"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Leonardo</td>
+                                    <td>Grespan</td>
+                                    <td>Leonardo.Grespan@knights.ucf.edu</td>
+                                    <td>123-456-7890</td>
+                                    <td><a href="#" id="btnEditContact"><i style="color:rgb(100, 100, 100);" class="fas fa-pencil"></i></a></td>
+                                    <td><a href="#" id="btnEraseContact"><i style="color:rgb(196, 90, 90);" class="fas fa-trash-alt"></i></a></td>
+                                </tr>-->
                                 </tbody>
                             </table>
                         </div>
@@ -135,13 +172,20 @@
                         <p>Source code can be found <a href="https://github.com/alexp0804/ContactManager">here</a></p>
                     </div>
                 </div>
+
+            
+                
             </div>
             <div class="col-md-1">
+                
             </div>
           </div>
         
     </body>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script type="text/javascript" src="js/code.js"></script>
+
+
 </html>
