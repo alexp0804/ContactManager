@@ -109,7 +109,9 @@ document.getElementById("SearchInput")
 // If search field becomes empty refresh the table
 var SearchInput = document.getElementById("SearchInput");
 SearchInput.addEventListener("input", (event) => {
-    doSearch(SearchInput.value);
+        if (SearchInput.value == "") {
+            doSearch("");
+        }
 });
 
 
@@ -439,11 +441,20 @@ function doSearch(search)
 						}
 						
 						var editIcon = row.insertCell(6);
-                        editIcon.innerHTML = '<td>' + '<div id="edit">' + '<i onclick="doEdit(this);" style="color:rgb(100,100,100);" class="fas fa-pencil"></i>' + '<i onclick="finishEdit(this);" style="display:none; color:green;" class="fas fa-check-square"></i>' + '</div>' + '</td>';
+                        editIcon.innerHTML = '<td>'
+                                                 + '<div id="edit">'
+                                                     + '<i onclick="doEdit(this);" style="color:rgb(100,100,100);" class="fas fa-pencil"></i>'
+                                                     + '<i onclick="finishEdit(this);" style="display:none; color:green;" class="fas fa-check-square"></i>'
+                                                 + '</div>'
+                                             + '</td>';
 
 
                         var deleteIcon = row.insertCell(7);
-                        editIcon.innerHTML = '<td>' + '<div id="delete">' + '<i onclick="doDelete(this);" style="color:rgb(196,90,90);" class="fas fa-trash-alt"></i>' + '</div>' + '</td>';
+                        editIcon.innerHTML = '<td>'
+                                                 + '<div id="delete">'
+                                                     + '<i onclick="doDelete(this);" style="color:rgb(196,90,90);" class="fas fa-trash-alt"></i>'
+                                                 + '</div>'
+                                             + '</td>';
                     }
                 }
             }
@@ -474,6 +485,13 @@ function doEdit(element)
 
 
 }
+
+// newFirstName
+// newLastName
+// newEmail
+// newPhone
+// userID
+// contID
 
 function finishEdit(element)
 {
