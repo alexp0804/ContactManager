@@ -431,8 +431,8 @@ function doSearch(search)
                         for (const field of info_fields)
                         {
                             var cell = row.insertCell(-1); 
+				field.sort();
                             cell.innerHTML = contacts[i][field];
-				cell.sort();
                             if (field == "ID" || field == "USERID")
                             {
                                 cell.style.display = "none";
