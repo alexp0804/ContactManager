@@ -535,7 +535,15 @@ function finishEdit(element)
         {
             return false;
         }
-        xhr.send(jsonPayload);
+		xhr.send(jsonPayload);
+		
+		document.getElementById("finishEdit").innerHTML = "You have updated the contact";
+		$('#finishEdit').removeClass('d-none');
+		//clears up the alert after 5 seconds
+		setTimeout(function() {
+			//document.getElementById("addingResult").innerHTML = "";
+			$('#finishEdit').addClass('d-none');
+		}, 5000);
 	}
 	catch(err)
 	{

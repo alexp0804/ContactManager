@@ -231,3 +231,10 @@ label {
     width: 55%;
     z-index:9999; 
 }
+
+#finishEdit {
+    position:fixed; 
+    top: 15px; 
+    width: 55%;
+    z-index:9999; 
+}
