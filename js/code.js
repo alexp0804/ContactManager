@@ -555,6 +555,7 @@ function doDelete(element)
     // Hide row
 	row.setAttribute("hidden", "hidden");
 	
+	document.getElementById("deletingResult").innerHTML = "You have deleted the contact.";
 	$('#deletingResult').removeClass('d-none');
 	//clears up the alert after 5 seconds
 	setTimeout(function() {
