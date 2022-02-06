@@ -553,7 +553,14 @@ function doDelete(element)
     var cells = row.children;
 
     // Hide row
-    row.setAttribute("hidden", "hidden"); 
+	row.setAttribute("hidden", "hidden");
+	
+	$('#deletingResult').removeClass('d-none');
+	//clears up the alert after 5 seconds
+	setTimeout(function() {
+		//document.getElementById("addingResult").innerHTML = "";
+		$('#deletingResult').addClass('d-none');
+	}, 5000);
 
     // Delete from database
     var tmp = { contFirstName: cells[0].innerHTML, 

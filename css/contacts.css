@@ -223,3 +223,11 @@ label {
     width: 55%;
     z-index:9999; 
 }
+
+
+#deletingResult {
+    position:fixed; 
+    top: 15px; 
+    width: 55%;
+    z-index:9999; 
+}
