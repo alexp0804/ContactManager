@@ -537,7 +537,7 @@ function finishEdit(element)
         }
 		xhr.send(jsonPayload);
 		
-		document.getElementById("finishEdit").innerHTML = "You have updated the contact";
+		document.getElementById("finishEdit").innerHTML = "You have successfully updated the contact";
 		$('#finishEdit').removeClass('d-none');
 		//clears up the alert after 5 seconds
 		setTimeout(function() {
