@@ -14,7 +14,7 @@
     $dbName = "COP4331";
 
     $conn = new mysqli($serverName, $dBUsername, $dBPassword, $dbName);
-	if ($conn->connect_error) 
+	if ($conn->connect_error)
 	{
 		returnWithError($conn->connect_error);
 	} 
